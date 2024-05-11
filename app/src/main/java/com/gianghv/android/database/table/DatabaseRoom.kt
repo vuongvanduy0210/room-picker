@@ -1,8 +1,10 @@
 package com.gianghv.android.database.table
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.gianghv.android.domain.Room
 
+@Entity
 data class DatabaseRoom(
     @PrimaryKey val id: String,
     val name: String,
