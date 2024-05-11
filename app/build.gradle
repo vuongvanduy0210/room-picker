@@ -1,0 +1,125 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
+    id 'com.google.devtools.ksp'
+}
+
+android {
+    namespace AppConfigs.application_id
+
+    compileSdk AppConfigs.compile_sdk_version
+
+    defaultConfig {
+        applicationId AppConfigs.application_id
+        minSdkVersion AppConfigs.min_sdk_version
+        targetSdk AppConfigs.target_sdk_version
+        versionCode AppConfigs.version_code
+        versionName AppConfigs.version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        def localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            def localProperties = new Properties()
+            localProperties.load(new FileInputStream(localPropertiesFile))
+            buildConfigField "String", "API_URL", localProperties['API_URL']
+        }
+    }
+
+    buildTypes {
+        release {
+            resValue "string", "app_name", AppConfigs.app_name
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix = ".dev"
+            resValue "string", "app_name", AppConfigs.app_name_dev
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+        buildConfig true
+    }
+
+
+}
+
+dependencies {
+
+    implementation Deps.core_ktx
+    implementation Deps.appcompat
+    implementation Deps.material
+    implementation Deps.constraint_layout
+    implementation Deps.navigation_fragment
+    implementation Deps.navigation_ktx
+
+    implementation Deps.viewPager2
+
+    // Hilt
+    implementation Deps.dagger_hilt
+    ksp Deps.dagger_hilt_compiler
+
+    // Retrofit for networking
+
+    // define a BOM and its version
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+
+    // define any required OkHttp artifacts without version
+    implementation Deps.OkHttp3
+    implementation Deps.OkHttp3_logging
+
+    implementation Deps.retrofit
+    implementation Deps.retrofit_coroutine_adapter
+    implementation Deps.retrofit_converter_moshi
+
+    // Moshi
+    ksp Deps.moshi_codegen
+    implementation Deps.moshi
+    implementation Deps.moshi_kotlin
+    implementation Deps.moshi_adapter
+
+    // Coroutines
+    implementation Deps.coroutine_core
+    implementation Deps.coroutine_android
+
+    // Glide
+    implementation Deps.glide
+    ksp Deps.glide_compiler
+
+    //Room
+    implementation Deps.room_runtime
+    ksp Deps.room_compiler
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation Deps.room_ktx
+
+    // Timber
+    implementation Deps.timber
+
+    // Lottie for animation
+    implementation Deps.lottie
+
+    //Cloudinary
+    implementation Deps.cloudinary
+
+    //junit
+    testImplementation Deps.junit
+    androidTestImplementation Deps.androidx_junit
+    androidTestImplementation Deps.espresso_core
+}

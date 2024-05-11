@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#24BAEC</color>
+    <color name="dark_primary">#1DA8D6</color>
+    <color name="action_color">#FF7029</color>
+    <color name="light_primary">#CAEAFF</color>
+    <color name="dark_frame">#16181F</color>
+    <color name="dark_shape">#20232D</color>
+    <color name="text_dark_color">#1B1E28</color>
+    <color name="gray_subtext_color">#7D848D</color>
+    <color name="line_stroke_color">#F8F9FA</color>
+    <color name="selection_card_bg">#FFFFFF</color>
+    <color name="onclick_selection_card_bg">#BFBCBC</color>
+    <color name="light_pink">#FFDFE6</color>
+    <color name="greeting_card_color">#ECECF8</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent1">#50000000</color>
+    <color name="blur_gray">#99F5EEEE</color>
+    <color name="card_gray">#EDE9E9</color>
+</resources>

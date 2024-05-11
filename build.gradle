@@ -1,0 +1,40 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+
+    ext.kotlin_version = "1.9.22"
+    ext.hilt_version = '2.50'
+    ext.moshi_version = '1.15.1'
+    ext.room_version = '2.6.1'
+    ext.nav_version = '2.7.6'
+    ext.coroutines_version = '1.7.3'
+    ext.glide_version = '4.14.2'
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath ClassPath.ksp
+        classpath ClassPath.nav
+        classpath ClassPath.kotlin
+        classpath ClassPath.dagger_hilt
+        classpath ClassPath.ktLint
+        classpath ClassPath.gradle
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    apply plugin: Plugins.ktLint
+}
+
+tasks.register('clean', Delete) {
+    delete rootProject.buildDir
+}
