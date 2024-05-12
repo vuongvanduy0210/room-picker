@@ -1,8 +1,10 @@
 package com.gianghv.android.database.table
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.gianghv.android.domain.Image
 
+@Entity
 data class DatabaseEvaluationImage(
     @PrimaryKey val id: String, val evaluationId: String, val url: String
 )
