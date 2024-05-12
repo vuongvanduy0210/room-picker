@@ -118,6 +118,9 @@ dependencies {
     //Cloudinary
     implementation Deps.cloudinary
 
+    //Toasty
+    implementation Deps.toasty
+
     //junit
     testImplementation Deps.junit
     androidTestImplementation Deps.androidx_junit

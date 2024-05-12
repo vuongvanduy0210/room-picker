@@ -15,10 +15,13 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
     abstract val layoutRes: Int
 
+    abstract fun init()
+
     abstract fun setUp()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
+        init()
         return binding.root
     }
 
