@@ -1,6 +1,5 @@
 package com.gianghv.android
 
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 
