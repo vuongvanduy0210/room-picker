@@ -1,4 +1,4 @@
-package com.gianghv.android.views.sign_in
+package com.gianghv.android.views.sign_up
 
 import com.gianghv.android.R
 import com.gianghv.android.base.BaseFragment

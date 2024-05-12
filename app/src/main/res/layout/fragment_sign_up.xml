@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.sign_in.SignUpFragment">
+        tools:context=".views.sign_up.SignUpFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView

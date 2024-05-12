@@ -14,8 +14,9 @@
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.gianghv.android.views.sign_in.SignUpFragment"
+        android:name="com.gianghv.android.views.sign_up.SignUpFragment"
         android:label="SignUpFragment" />
 </navigation>
