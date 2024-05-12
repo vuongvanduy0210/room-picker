@@ -2,4 +2,15 @@
     <string name="app_name">Android MVVM Boilerplate Hilt</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="don_t_have_an_account">Chưa có tài khoản?</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="welcome">Welcome Back</string>
+    <string name="login">Đăng nhập</string>
+    <string name="confirm_password_hint">Xác nhận mật khẩu</string>
+    <string name="name_hint">Tên</string>
+    <string name="have_an_account">Đã có tài khoản?</string>
+    <string name="create_account">Đăng Ký Tài Khoản</string>
 </resources>

@@ -30,6 +30,8 @@ class Versions {
 
     static final String cloudinary = "2.5.0"
 
+    static final String toasty = "1.5.2"
+
     //UI
     static final String flexBoxLayout = "3.0.0"
     static final String viewPager2 = "1.0.0"
@@ -106,6 +108,9 @@ class Deps {
 
     //Cloudinary
     static final String cloudinary = "com.cloudinary:cloudinary-android:$Versions.cloudinary"
+
+    //Toasty
+    static final String toasty = "com.github.GrenderG:Toasty:$Versions.toasty"
 
     // Testing
     static final String junit = "junit:junit:${Versions.jUnit}"

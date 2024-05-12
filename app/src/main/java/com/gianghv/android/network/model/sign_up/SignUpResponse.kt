@@ -1,10 +1,12 @@
-package com.gianghv.android.network.model.login
+package com.gianghv.android.network.model.sign_up
 
 
 import com.gianghv.android.network.model.UserResponse
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-data class LoginResponse(
+@JsonClass(generateAdapter = true)
+data class SignUpResponse(
     @Json(name = "accessToken")
     val accessToken: String? = null,
     @Json(name = "message")
