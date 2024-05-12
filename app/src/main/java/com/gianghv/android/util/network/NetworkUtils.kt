@@ -2,10 +2,7 @@ package com.gianghv.android.util.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.http.HttpResponseCache
 import android.util.Log
-import java.io.File
-import java.io.IOException
 
 object NetworkUtils {
     /**
