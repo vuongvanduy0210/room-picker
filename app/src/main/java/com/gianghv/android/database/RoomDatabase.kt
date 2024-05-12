@@ -12,9 +12,13 @@ import com.gianghv.android.database.table.DatabaseRoomEvaluation
 import com.gianghv.android.database.table.DatabaseRoomImage
 import com.gianghv.android.database.table.DatabaseUser
 
-
 @Database(
-    entities = [DatabaseRoom::class, DatabaseEvaluationImage::class, DatabaseRoomEvaluation::class, DatabaseRoomImage::class, DatabaseUser::class],
+    entities = [
+        DatabaseRoom::class, DatabaseEvaluationImage::class,
+        DatabaseRoomEvaluation::class,
+        DatabaseRoomImage::class,
+        DatabaseUser::class
+    ],
     version = 1,
     exportSchema = false
 )
@@ -24,5 +28,3 @@ abstract class RoomDatabase : RoomDatabase() {
     abstract val imagesDao: ImageDao
     abstract val usersDao: UserDao
 }
-
-

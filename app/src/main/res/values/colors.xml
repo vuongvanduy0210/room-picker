@@ -24,4 +24,7 @@
     <color name="transparent1">#50000000</color>
     <color name="blur_gray">#99F5EEEE</color>
     <color name="card_gray">#EDE9E9</color>
+
+    <color name="blue_dark">#2196F3</color>
+    <color name="blue_light">#03A9F4</color>
 </resources>

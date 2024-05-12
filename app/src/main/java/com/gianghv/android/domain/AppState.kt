@@ -6,5 +6,3 @@ object AppState {
     var name: String = ""
     var firstAppOpen: Boolean = false
 }
-
-

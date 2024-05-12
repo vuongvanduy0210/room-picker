@@ -9,7 +9,7 @@ data class DatabaseRoomEvaluation(
     @PrimaryKey
     val id: String,
     val content: String,
-    val star: Int,
+    val star: Int
 )
 
 fun DatabaseRoomEvaluation.asDatabaseModel(): RoomEvaluation {

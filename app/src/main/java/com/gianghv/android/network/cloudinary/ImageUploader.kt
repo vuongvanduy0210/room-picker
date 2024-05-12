@@ -12,7 +12,7 @@ object ImageUploader {
         onProgress: ((Long, Long) -> Unit)?,
         onSuccess: ((Map<*, *>) -> Unit)?,
         onError: ((ErrorInfo) -> Unit)?,
-        onReschedule: ((ErrorInfo) -> Unit)?,
+        onReschedule: ((ErrorInfo) -> Unit)?
     ) {
         MediaManager.get().upload(uri).callback(object : UploadCallback {
             override fun onStart(requestId: String) {
