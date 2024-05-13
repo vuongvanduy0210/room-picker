@@ -1,4 +1,4 @@
-package com.gianghv.android.network.model.sign_up
+package com.gianghv.android.network.model.signup
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

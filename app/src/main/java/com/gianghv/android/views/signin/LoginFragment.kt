@@ -1,4 +1,4 @@
-package com.gianghv.android.views.sign_in
+package com.gianghv.android.views.signin
 
 import android.text.Spannable
 import android.text.SpannableString

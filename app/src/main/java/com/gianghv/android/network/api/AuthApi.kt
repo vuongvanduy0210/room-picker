@@ -2,8 +2,8 @@ package com.gianghv.android.network.api
 
 import com.gianghv.android.network.model.login.LoginRequest
 import com.gianghv.android.network.model.login.LoginResponse
-import com.gianghv.android.network.model.sign_up.SignUpRequest
-import com.gianghv.android.network.model.sign_up.SignUpResponse
+import com.gianghv.android.network.model.signup.SignUpRequest
+import com.gianghv.android.network.model.signup.SignUpResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 

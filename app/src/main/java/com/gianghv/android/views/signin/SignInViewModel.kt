@@ -1,10 +1,10 @@
-package com.gianghv.android.views.sign_in
+package com.gianghv.android.views.signin
 
 import androidx.lifecycle.viewModelScope
 import com.gianghv.android.base.BaseViewModel
 import com.gianghv.android.domain.BGType
 import com.gianghv.android.network.model.login.LoginRequest
-import com.gianghv.android.network.model.sign_up.SignUpRequest
+import com.gianghv.android.network.model.signup.SignUpRequest
 import com.gianghv.android.repository.auth.AuthRepository
 import com.gianghv.android.util.app.AppConstants
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,4 +1,4 @@
-package com.gianghv.android.views.sign_up
+package com.gianghv.android.views.signup
 
 import android.text.Spannable
 import android.text.SpannableString
@@ -13,7 +13,7 @@ import com.gianghv.android.base.BaseFragment
 import com.gianghv.android.databinding.FragmentSignUpBinding
 import com.gianghv.android.domain.BGType
 import com.gianghv.android.util.app.AppUtils
-import com.gianghv.android.views.sign_in.SignInViewModel
+import com.gianghv.android.views.signin.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
