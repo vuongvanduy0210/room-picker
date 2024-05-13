@@ -16,5 +16,5 @@ data class Room(
     val price: Int,
     val active: String,
     val createdAt: String,
-    val updatedAt: String,
+    val updatedAt: String
 ) : Parcelable

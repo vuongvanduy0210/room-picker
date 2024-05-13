@@ -10,7 +10,7 @@ data class DatabaseUser(
     val id: String,
     val name: String,
     val email: String,
-    val role: String,
+    val role: String
 )
 
 fun DatabaseUser.asDomainModel(): User {

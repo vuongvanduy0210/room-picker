@@ -6,7 +6,9 @@ import com.gianghv.android.domain.Image
 
 @Entity
 data class DatabaseRoomImage(
-    @PrimaryKey val id: String, val roomId: String, val url: String
+    @PrimaryKey val id: String,
+    val roomId: String,
+    val url: String
 )
 
 fun DatabaseRoomImage.asDomainModel(): Image {

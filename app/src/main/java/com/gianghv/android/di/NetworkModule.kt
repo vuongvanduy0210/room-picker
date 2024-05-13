@@ -5,6 +5,8 @@ import com.gianghv.android.network.api.AuthApi
 import com.gianghv.android.network.api.EvaluationApi
 import com.gianghv.android.network.api.RoomApi
 import com.gianghv.android.network.api.UserApi
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,7 +34,11 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder().addConverterFactory(MoshiConverterFactory.create()).baseUrl(BuildConfig.API_URL)
+        Retrofit.Builder()
+            .addConverterFactory(
+                MoshiConverterFactory.create(Moshi.Builder().add(KotlinJsonAdapterFactory()).build())
+            )
+            .baseUrl(BuildConfig.API_URL)
             .client(okHttpClient).build()
 
     @Provides

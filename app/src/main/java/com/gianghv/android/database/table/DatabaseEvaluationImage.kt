@@ -6,7 +6,9 @@ import com.gianghv.android.domain.Image
 
 @Entity
 data class DatabaseEvaluationImage(
-    @PrimaryKey val id: String, val evaluationId: String, val url: String
+    @PrimaryKey val id: String,
+    val evaluationId: String,
+    val url: String
 )
 
 fun DatabaseEvaluationImage.asDomainModel(): Image {
@@ -16,5 +18,3 @@ fun DatabaseEvaluationImage.asDomainModel(): Image {
 fun List<DatabaseEvaluationImage>.asDomainModel(): List<Image> {
     return map { Image(it.id, it.url) }
 }
-
-

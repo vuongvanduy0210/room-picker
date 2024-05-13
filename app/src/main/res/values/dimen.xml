@@ -524,4 +524,6 @@
     <dimen name="sp_59">59.00sp</dimen>
     <dimen name="sp_60">60.00sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="box_corner_radius">@dimen/dp_16</dimen>
 </resources>
