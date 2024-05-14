@@ -8,6 +8,7 @@ import com.gianghv.android.util.app.AppConstants
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
@@ -16,10 +17,17 @@ open class BaseViewModel : ViewModel() {
 
     var exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         // show message
+        handleMessage(
+            message = throwable.message ?: AppConstants.DEFAULT_MESSAGE_ERROR,
+            bgType = BGType.BG_TYPE_ERROR
+        )
     }
 
-    val responseMessage: MutableSharedFlow<ResponseMessage> by lazy { MutableSharedFlow() }
-    val isLoading: MutableSharedFlow<Boolean> by lazy { MutableSharedFlow() }
+    private val _responseMessage = MutableSharedFlow<ResponseMessage>()
+    val responseMessage: SharedFlow<ResponseMessage> = _responseMessage
+
+    private val _isLoading = MutableSharedFlow<Boolean>()
+    val isLoading: SharedFlow<Boolean> = _isLoading
 
     fun <T> handleResponse(response: Response<T>, onSuccess: (T?) -> Unit, onError: (String?) -> Unit) {
         when (response) {
@@ -28,24 +36,26 @@ open class BaseViewModel : ViewModel() {
             }
 
             is Response.Error -> {
-                viewModelScope.launch {
-                    showMessage(
-                        message = response.message ?: AppConstants.DEFAULT_MESSAGE_ERROR,
-                        bgType = BGType.BG_TYPE_ERROR
-                    )
-                }
                 onError.invoke(response.message)
             }
         }
     }
 
-    suspend fun showMessage(message: String, bgType: BGType) {
-        responseMessage.emit(
-            ResponseMessage(
-                message = message,
-                bgType = bgType
+    fun handleMessage(message: String, bgType: BGType) {
+        viewModelScope.launch {
+            _responseMessage.emit(
+                ResponseMessage(
+                    message = message,
+                    bgType = bgType
+                )
             )
-        )
+        }
+    }
+
+    fun showLoading(isShow: Boolean) {
+        viewModelScope.launch {
+            _isLoading.emit(isShow)
+        }
     }
 
     override fun onCleared() {

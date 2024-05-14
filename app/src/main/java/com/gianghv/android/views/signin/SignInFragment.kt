@@ -10,20 +10,21 @@ import androidx.navigation.fragment.findNavController
 import com.gianghv.android.MainActivity
 import com.gianghv.android.R
 import com.gianghv.android.base.BaseFragment
-import com.gianghv.android.databinding.FragmentLoginBinding
+import com.gianghv.android.databinding.FragmentSignInBinding
 import com.gianghv.android.domain.BGType
 import com.gianghv.android.util.app.AppUtils
+import com.gianghv.android.views.common.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding>() {
+class SignInFragment : BaseFragment<FragmentSignInBinding>() {
 
-    override val layoutRes: Int = R.layout.fragment_login
+    override val layoutRes: Int = R.layout.fragment_sign_in
 
     private var activity: MainActivity? = null
 
-    private val signInViewModel: SignInViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun init() {
         activity = requireActivity() as MainActivity
@@ -49,18 +50,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
             layoutSignUp.setOnClickListener {
                 findNavController().navigate(
-                    LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
+                    SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
                 )
             }
         }
 
         lifecycleScope.launch {
-            signInViewModel.responseMessage.collect {
+            authViewModel.responseMessage.collect {
                 activity?.showMessage(requireContext(), it.message, it.bgType)
             }
         }
         lifecycleScope.launch {
-            signInViewModel.isLoading.collect {
+            authViewModel.isLoading.collect {
                 if (it) {
                     activity?.showLoading()
                 } else {
@@ -75,15 +76,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         val email = binding.edtEmail.text?.trim().toString()
         val pass = binding.edtPassword.text?.trim().toString()
         if (!AppUtils.isValidatedEmail(email)) {
-            activity?.showMessage(requireContext(), "Email không đúng!", BGType.BG_TYPE_ERROR)
+            activity?.showMessage(requireContext(), "Email không hợp lệ!", BGType.BG_TYPE_ERROR)
             binding.edtEmail.setText("")
             return
         }
         if (!AppUtils.isValidatedPassword(pass)) {
-            activity?.showMessage(requireContext(), "Mật khẩu không đúng!", BGType.BG_TYPE_ERROR)
+            activity?.showMessage(requireContext(), "Mật khẩu không hợp lệ!", BGType.BG_TYPE_ERROR)
             binding.edtPassword.setText("")
             return
         }
-        signInViewModel.login(email, pass)
+        authViewModel.signIn(email, pass)
     }
 }

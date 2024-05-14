@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 interface AuthRepository {
-    suspend fun login(loginRequest: LoginRequest): Response<LoginResponse>
+    suspend fun signIn(loginRequest: LoginRequest): Response<LoginResponse>
 
     suspend fun signUp(signUpRequest: SignUpRequest): Response<SignUpResponse>
 }
@@ -19,8 +19,8 @@ interface AuthRepository {
 class AuthRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource
 ) : AuthRepository {
-    override suspend fun login(loginRequest: LoginRequest) = withContext(Dispatchers.IO) {
-        authDataSource.login(loginRequest = loginRequest)
+    override suspend fun signIn(loginRequest: LoginRequest) = withContext(Dispatchers.IO) {
+        authDataSource.signIn(loginRequest = loginRequest)
     }
 
     override suspend fun signUp(signUpRequest: SignUpRequest) = withContext(Dispatchers.IO) {

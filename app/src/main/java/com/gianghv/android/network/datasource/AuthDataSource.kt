@@ -13,9 +13,9 @@ class AuthDataSource @Inject constructor(
     private val authApi: AuthApi
 ) : BaseRemoteDataSource() {
 
-    suspend fun login(loginRequest: LoginRequest): Response<LoginResponse> {
+    suspend fun signIn(loginRequest: LoginRequest): Response<LoginResponse> {
         return safeCallApi {
-            authApi.login(loginRequest = loginRequest)
+            authApi.signIn(loginRequest = loginRequest)
         }
     }
 
