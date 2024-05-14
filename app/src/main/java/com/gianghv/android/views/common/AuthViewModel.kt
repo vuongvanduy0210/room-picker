@@ -34,10 +34,11 @@ class AuthViewModel @Inject constructor(
                 },
                 onError = {
                     val message =
-                        if (it?.contains("400") == true)
+                        if (it?.contains("400") == true) {
                             AppConstants.EMAIL_PASSWORD_MESSAGE_ERROR
-                        else
+                        } else {
                             AppConstants.DEFAULT_MESSAGE_ERROR
+                        }
                     handleMessage(
                         message = message,
                         bgType = BGType.BG_TYPE_ERROR
@@ -65,10 +66,11 @@ class AuthViewModel @Inject constructor(
                 },
                 onError = {
                     val message =
-                        if (it?.contains("400") == true)
+                        if (it?.contains("400") == true) {
                             AppConstants.SIGN_UP_MESSAGE_ERROR
-                        else
+                        } else {
                             AppConstants.DEFAULT_MESSAGE_ERROR
+                        }
                     handleMessage(
                         message = message,
                         bgType = BGType.BG_TYPE_ERROR
