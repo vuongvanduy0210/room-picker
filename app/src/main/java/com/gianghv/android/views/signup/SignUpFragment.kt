@@ -6,14 +6,13 @@ import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.gianghv.android.MainActivity
 import com.gianghv.android.R
 import com.gianghv.android.base.BaseFragment
 import com.gianghv.android.databinding.FragmentSignUpBinding
-import com.gianghv.android.domain.BGType
 import com.gianghv.android.util.app.AppUtils
 import com.gianghv.android.views.common.AuthViewModel
+import com.gianghv.android.views.common.BGType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,7 +47,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             }
 
             layoutLogin.setOnClickListener {
-                findNavController().popBackStack()
+                navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
             }
 
             btnSignUp.setOnClickListener {
@@ -63,10 +62,13 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
         }
         lifecycleScope.launch {
             authViewModel.isLoading.collect {
+                activity?.showLoading(isShow = it)
+            }
+        }
+        lifecycleScope.launch {
+            authViewModel.isSignedIn.collect {
                 if (it) {
-                    activity?.showLoading()
-                } else {
-                    activity?.hideLoading()
+                    navigate(SignUpFragmentDirections.actionSignUpFragmentToMainNav())
                 }
             }
         }

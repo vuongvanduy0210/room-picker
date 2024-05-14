@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.gianghv.android.domain.BGType
+import com.gianghv.android.views.common.BGType
 import es.dmoral.toasty.Toasty
 
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
@@ -41,13 +41,13 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         }
     }
 
-    fun showLoading() {
-        hideLoading()
-        loadingDialog?.show()
-    }
-
-    fun hideLoading() {
-        loadingDialog?.dismiss()
+    fun showLoading(isShow: Boolean) {
+        if (isShow) {
+            loadingDialog?.dismiss()
+            loadingDialog?.show()
+        } else {
+            loadingDialog?.dismiss()
+        }
     }
 
     fun showMessage(context: Context, message: String, bgType: BGType) {

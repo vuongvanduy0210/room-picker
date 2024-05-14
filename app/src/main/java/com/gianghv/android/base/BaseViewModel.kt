@@ -2,9 +2,9 @@ package com.gianghv.android.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gianghv.android.domain.BGType
-import com.gianghv.android.domain.ResponseMessage
 import com.gianghv.android.util.app.AppConstants
+import com.gianghv.android.views.common.BGType
+import com.gianghv.android.views.common.ResponseMessage
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -29,7 +29,11 @@ open class BaseViewModel : ViewModel() {
     private val _isLoading = MutableSharedFlow<Boolean>()
     val isLoading: SharedFlow<Boolean> = _isLoading
 
-    fun <T> handleResponse(response: Response<T>, onSuccess: (T?) -> Unit, onError: (String?) -> Unit) {
+    suspend fun <T> handleResponse(
+        response: Response<T>,
+        onSuccess: suspend (T?) -> Unit,
+        onError: suspend (String?) -> Unit
+    ) {
         when (response) {
             is Response.Success -> {
                 onSuccess.invoke(response.data)

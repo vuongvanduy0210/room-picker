@@ -1,4 +1,4 @@
-package com.gianghv.android.domain
+package com.gianghv.android.views.common
 
 data class ResponseMessage(
     val message: String,

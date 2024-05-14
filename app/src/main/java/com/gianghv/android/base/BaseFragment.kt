@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 
 abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
@@ -28,6 +30,10 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUp()
+    }
+
+    fun navigate(direction: NavDirections) {
+        findNavController().navigate(direction)
     }
 
     override fun onDestroyView() {
