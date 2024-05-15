@@ -6,14 +6,13 @@ import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.gianghv.android.MainActivity
 import com.gianghv.android.R
 import com.gianghv.android.base.BaseFragment
 import com.gianghv.android.databinding.FragmentSignUpBinding
-import com.gianghv.android.domain.BGType
 import com.gianghv.android.util.app.AppUtils
-import com.gianghv.android.views.signin.SignInViewModel
+import com.gianghv.android.views.common.AuthViewModel
+import com.gianghv.android.views.common.BGType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -24,15 +23,13 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
     private var activity: MainActivity? = null
 
-    private val signInViewModel: SignInViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun init() {
         activity = requireActivity() as MainActivity
     }
 
     override fun setUp() {
-        activity = requireActivity() as MainActivity
-
         binding.apply {
             tvTitle.text = SpannableString("Đăng Ký Tài Khoản").apply {
                 setSpan(
@@ -50,7 +47,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             }
 
             layoutLogin.setOnClickListener {
-                findNavController().popBackStack()
+                navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
             }
 
             btnSignUp.setOnClickListener {
@@ -59,16 +56,19 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
         }
 
         lifecycleScope.launch {
-            signInViewModel.responseMessage.collect {
+            authViewModel.responseMessage.collect {
                 activity?.showMessage(requireContext(), it.message, it.bgType)
             }
         }
         lifecycleScope.launch {
-            signInViewModel.isLoading.collect {
+            authViewModel.isLoading.collect {
+                activity?.showLoading(isShow = it)
+            }
+        }
+        lifecycleScope.launch {
+            authViewModel.isSignedIn.collect {
                 if (it) {
-                    activity?.showLoading()
-                } else {
-                    activity?.hideLoading()
+                    navigate(SignUpFragmentDirections.actionSignUpFragmentToMainNav())
                 }
             }
         }
@@ -100,7 +100,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             binding.edtConfirmPassword.setText("")
             return
         }
-        signInViewModel.signUp(
+        authViewModel.signUp(
             email = email,
             name = name,
             password = pass
