@@ -36,7 +36,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="wrap_content"
                 android:hint="@string/email_hint"
                 android:imeOptions="actionGo"
                 android:inputType="textEmailAddress"

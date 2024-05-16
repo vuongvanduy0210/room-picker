@@ -13,4 +13,15 @@
     <string name="name_hint">Tên</string>
     <string name="have_an_account">Đã có tài khoản?</string>
     <string name="create_account">Đăng Ký Tài Khoản</string>
+    <string name="hint_search">Tìm kiếm</string>
+    <string name="check_in">Check-in</string>
+    <string name="check_out">Check-out</string>
+    <string name="dd_mm_yy">DD/MM/YY</string>
+    <string name="price">Giá</string>
+    <string name="apply">Áp dụng</string>
+    <string name="cancel">Huỷ</string>
+    <string name="option">Tuỳ chọn</string>
+    <string name="reset">Đặt lại</string>
+    <string name="number_people">Số người</string>
+    <string name="recommend_hotel">Đề xuất</string>
 </resources>
