@@ -7,7 +7,7 @@ import com.gianghv.android.network.model.login.LoginRequest
 import com.gianghv.android.network.model.signup.SignUpRequest
 import com.gianghv.android.repository.auth.AuthRepository
 import com.gianghv.android.util.app.AppConstants
-import com.gianghv.android.util.ext.Mapper.toUser
+import com.gianghv.android.util.ext.toUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

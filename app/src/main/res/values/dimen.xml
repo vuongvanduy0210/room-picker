@@ -526,4 +526,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="box_corner_radius">@dimen/dp_16</dimen>
+    <dimen name="title_filter_text_size">@dimen/sp_20</dimen>
+    <dimen name="img_item_hotel_height">@dimen/dp_200</dimen>
+    <dimen name="img_item_hotel_width">@dimen/dp_200</dimen>
 </resources>

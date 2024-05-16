@@ -1,20 +1,24 @@
 package com.gianghv.android.views.main
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.gianghv.android.MainActivity
 import com.gianghv.android.R
+import com.gianghv.android.base.BaseFragment
+import com.gianghv.android.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    override val layoutRes = R.layout.fragment_home
+
+    private var activity: MainActivity? = null
+
+    override fun init() {
+        activity = requireActivity() as MainActivity
+    }
+
+    override fun setUp() {
+        binding.btFilter.setOnClickListener {
+            val filterDialog = FilterBottomSheetDialog()
+            filterDialog.show(childFragmentManager, filterDialog.tag)
+        }
     }
 }

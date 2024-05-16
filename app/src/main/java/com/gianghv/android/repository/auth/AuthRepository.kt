@@ -2,8 +2,8 @@ package com.gianghv.android.repository.auth
 
 import com.gianghv.android.base.Response
 import com.gianghv.android.datasource.local.LocalDataSource
-import com.gianghv.android.domain.TokenModel
 import com.gianghv.android.datasource.remote.AuthDataSource
+import com.gianghv.android.domain.TokenModel
 import com.gianghv.android.network.model.login.LoginRequest
 import com.gianghv.android.network.model.login.LoginResponse
 import com.gianghv.android.network.model.signup.SignUpRequest
