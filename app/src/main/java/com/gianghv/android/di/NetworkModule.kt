@@ -3,6 +3,7 @@ package com.gianghv.android.di
 import com.gianghv.android.BuildConfig
 import com.gianghv.android.network.api.AuthApi
 import com.gianghv.android.network.api.EvaluationApi
+import com.gianghv.android.network.api.OrderApi
 import com.gianghv.android.network.api.RoomApi
 import com.gianghv.android.network.api.UserApi
 import com.squareup.moshi.Moshi
@@ -56,5 +57,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRoomService2(retrofit: Retrofit): RoomApi = retrofit.create(RoomApi::class.java)
+    fun provideRoomService(retrofit: Retrofit): RoomApi = retrofit.create(RoomApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideOrderService(retrofit: Retrofit): OrderApi = retrofit.create(OrderApi::class.java)
 }

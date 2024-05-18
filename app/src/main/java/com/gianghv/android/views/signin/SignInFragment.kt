@@ -6,11 +6,11 @@ import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.gianghv.android.MainActivity
 import com.gianghv.android.R
 import com.gianghv.android.base.BaseFragment
 import com.gianghv.android.databinding.FragmentSignInBinding
 import com.gianghv.android.util.app.AppUtils
+import com.gianghv.android.views.AuthActivity
 import com.gianghv.android.views.common.AuthViewModel
 import com.gianghv.android.views.common.BGType
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,12 +21,12 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
 
     override val layoutRes: Int = R.layout.fragment_sign_in
 
-    private var activity: MainActivity? = null
+    private var activity: AuthActivity? = null
 
     private val authViewModel: AuthViewModel by viewModels()
 
     override fun init() {
-        activity = requireActivity() as MainActivity
+        activity = requireActivity() as AuthActivity
     }
 
     override fun setUp() {
@@ -66,7 +66,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
         lifecycleScope.launch {
             authViewModel.isSignedIn.collect {
                 if (it) {
-                    navigate(SignInFragmentDirections.actionSignInFragmentToMainNav())
+                    // Clear the entire back stack
+                    navigatePopBackstack(SignInFragmentDirections.actionSignInFragmentToMainNav())
                 }
             }
         }

@@ -36,6 +36,11 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
         findNavController().navigate(direction)
     }
 
+    fun navigatePopBackstack(direction: NavDirections) {
+        findNavController().popBackStack(findNavController().graph.getStartDestination(), false)
+        findNavController().navigate(direction)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

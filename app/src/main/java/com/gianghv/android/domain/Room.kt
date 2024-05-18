@@ -2,6 +2,7 @@ package com.gianghv.android.domain
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlin.math.round
 
 @Parcelize
 data class Room(
@@ -10,11 +11,17 @@ data class Room(
     val desc: String,
     val images: List<Image>,
     val evaluation: List<RoomEvaluation>,
-    val type: String,
-    val status: String,
+    val type: RoomType,
+    val status: RoomStatus,
     val countPeople: Int,
     val price: Int,
-    val active: String,
+    val active: RoomActive,
     val createdAt: String,
     val updatedAt: String
-) : Parcelable
+) : Parcelable {
+    fun getEvaluationAverage(): Double {
+        val average = evaluation.map { it.star }.average()
+        // Round to 1 digit
+        return round(average * 10) / 10
+    }
+}

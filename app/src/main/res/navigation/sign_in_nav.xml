@@ -18,7 +18,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signInFragment_to_main_nav"
-            app:destination="@id/main_nav"
+            app:destination="@id/main_activity"
             app:enterAnim="@android:anim/slide_in_left"
             app:popUpTo="@id/signInFragment"
             app:popUpToInclusive="true" />
@@ -29,17 +29,22 @@
         android:name="com.gianghv.android.views.signup.SignUpFragment"
         android:label="SignUpFragment">
         <action
-            android:id="@+id/action_signUpFragment_to_main_nav"
-            app:destination="@id/main_nav"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:popUpTo="@id/signUpFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_signUpFragment_to_main_nav"
+            app:destination="@id/main_activity"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
     </fragment>
-    <include app:graph="@navigation/main_nav" />
+
+    <activity
+        android:id="@+id/main_activity"
+        android:name="com.gianghv.android.views.MainActivity" />
 </navigation>
