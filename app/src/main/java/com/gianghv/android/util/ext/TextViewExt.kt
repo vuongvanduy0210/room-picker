@@ -3,6 +3,7 @@ package com.gianghv.android.util.ext
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 @BindingAdapter("dateFormatter")
@@ -13,5 +14,15 @@ fun TextView.dateFormatter(string: String?) {
             val format = SimpleDateFormat("dd/MM/yyy", Locale.getDefault())
             this.text = format.format(it)
         }
+    }
+}
+
+fun TextView.currentDate() {
+    try {
+        val date = Date()
+        val format = SimpleDateFormat("dd/MM/yyy", Locale.getDefault())
+        this.text = format.format(date)
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 }

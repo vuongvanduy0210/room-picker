@@ -1,9 +1,9 @@
 package com.gianghv.android.di
 
-import com.gianghv.android.repository.RoomRepository
-import com.gianghv.android.repository.RoomRepositoryImpl
 import com.gianghv.android.repository.auth.AuthRepository
 import com.gianghv.android.repository.auth.AuthRepositoryImpl
+import com.gianghv.android.repository.room.RoomRepository
+import com.gianghv.android.repository.room.RoomRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +15,8 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideRoomRepository(): RoomRepository {
-        return RoomRepositoryImpl()
+    fun provideRoomRepository(roomRepositoryImpl: RoomRepositoryImpl): RoomRepository {
+        return roomRepositoryImpl
     }
 
     @Provides

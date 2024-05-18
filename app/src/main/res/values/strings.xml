@@ -24,4 +24,9 @@
     <string name="reset">Đặt lại</string>
     <string name="number_people">Số người</string>
     <string name="recommend_hotel">Đề xuất</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_order">Order</string>
+    <string name="menu_profile">Profile</string>
+    <string name="hh_mm">HH:mm</string>
+    <string name="dd_mm_yyyy_hh_mm">DD/MM/YYYY HH:MM</string>
 </resources>

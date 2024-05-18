@@ -15,6 +15,16 @@ fun ImageView.loadImageWithUrl(url: String) {
     Glide.with(this).load(url).into(this)
 }
 
+fun ImageView.loadImageFitCenter(url: String) {
+    var requestOptions: RequestOptions = RequestOptions()
+        .diskCacheStrategy(DiskCacheStrategy.ALL) // Cache strategy
+
+    if (!NetworkUtils.isNetworkAvailable(this.context)) {
+        requestOptions = requestOptions.onlyRetrieveFromCache(true)
+    }
+    Glide.with(this).load(url).apply(requestOptions).fitCenter().into(this)
+}
+
 @BindingAdapter("imageUrl")
 fun ImageView.loadImageCenterCrop(url: String) {
     var requestOptions: RequestOptions = RequestOptions()
