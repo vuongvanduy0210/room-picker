@@ -62,6 +62,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
         binding.textPrice.text = "${mRoom?.price}VND"
         binding.textName.text = mRoom?.name
         binding.textDesc.text = mRoom?.desc
+        binding.textNumberOfPeople.text = mRoom?.countPeople.toString()
 
         if (mRoom?.evaluation.isNullOrEmpty()) {
             binding.textEvaluation.visibility = View.GONE
