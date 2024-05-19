@@ -10,8 +10,6 @@ import com.gianghv.android.domain.TypePayment
 import com.gianghv.android.repository.auth.AuthRepository
 import com.gianghv.android.repository.room.RoomRepository
 import com.gianghv.android.util.ext.dateFormatterDMYHM
-import com.gianghv.android.util.ext.dateFormatterZ
-import com.gianghv.android.util.ext.parseDateZ
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
@@ -37,7 +35,7 @@ class OrderViewModel @Inject constructor(
     val totalPrice = MutableLiveData(0)
     val peopleCount = MutableLiveData(1)
     val note = MutableLiveData("")
-    var uid: String? = null
+    private var uid: String? = null
 
     val currentOrder = MutableLiveData<Order>()
 
@@ -86,24 +84,22 @@ class OrderViewModel @Inject constructor(
             val checkinDate = "${checkInDate.value} ${checkInTime.value}".dateFormatterDMYHM()
             val checkoutDate = "${checkOutDate.value} ${checkOutTime.value}".dateFormatterDMYHM()
 
-            val checkinDateZ = checkinDate?.parseDateZ()
-            val checkoutDateZ = checkoutDate?.parseDateZ()
-
-            if (checkinDateZ.isNullOrEmpty() && checkoutDateZ.isNullOrEmpty()) return
-
-            val order = Order(
-                "",
-                uid ?: "",
-                TypePayment.EMPTY,
-                totalPrice.value ?: 0,
-                OrderStatus.PENDING,
-                note.value ?: "",
-                room.value?.id ?: "",
-                peopleCount.value ?: 1,
-                checkinDateZ.toString(),
-                checkoutDateZ.toString()
-            )
-            requestCreateOrder(order)
+            if (checkinDate != null && checkoutDate != null) {
+                val order = Order(
+                    "",
+                    uid ?: "",
+                    TypePayment.EMPTY,
+                    totalPrice.value ?: 0,
+                    OrderStatus.PENDING,
+                    note.value ?: "",
+                    room.value?.id ?: "",
+                    peopleCount.value ?: 1,
+                    checkinDate,
+                    checkoutDate,
+                    Date()
+                )
+                requestCreateOrder(order)
+            }
         } else {
             Timber.d("Can't Order")
         }
@@ -203,13 +199,13 @@ class OrderViewModel @Inject constructor(
 
         orderList.value?.forEach { order ->
 
-            val startDate = order.startDate.dateFormatterZ()
-            val endDate = order.endDate.dateFormatterZ()
+            val startDate = order.startDate
+            val endDate = order.endDate
 
             Timber.d("startDate $startDate")
             Timber.d("endDate $endDate")
 
-            if (checkin != null && checkout != null && startDate != null && endDate != null) {
+            if (checkin != null && checkout != null) {
                 if (dateRangesOverlap(startDate, endDate, checkin, checkout)) {
                     isNonOverlapping = isNonOverlapping and false
                 }

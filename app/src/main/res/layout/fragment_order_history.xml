@@ -3,10 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gianghv.android.views.orderhistory.OrderHistoryViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.ordersuccess.OrderSuccessFragment">
+        tools:context=".views.orderhistory.OrderHistoryFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/top_app_bar"
@@ -26,10 +33,10 @@
                         android:id="@+id/button_back"
                         android:layout_width="@dimen/dp_24"
                         android:layout_height="@dimen/dp_24"
-                        android:visibility="invisible"
                         android:layout_alignParentStart="true"
                         android:background="@color/transparent"
-                        android:src="@drawable/ic_back" />
+                        android:src="@drawable/ic_back"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/text_title"
@@ -38,7 +45,7 @@
                         android:layout_marginEnd="@dimen/dp_24"
                         android:clickable="false"
                         android:gravity="center"
-                        android:text="Đặt phòng thành công"
+                        android:text="Lịch sử"
                         android:textColor="@color/blue_dark"
                         android:textSize="@dimen/sp_18"
                         android:textStyle="bold" />
@@ -51,53 +58,40 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animation"
-                android:layout_width="@dimen/dp_200"
-                android:layout_height="@dimen/dp_200"
-                app:layout_constraintBottom_toTopOf="@id/button_home"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:lottie_loop="true"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/check_email" />
-
             <TextView
-                android:id="@+id/text_success"
+                android:id="@+id/text_filter_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/animation"
-                android:layout_marginTop="@dimen/dp_32"
-                android:gravity="center"
-                android:text="Đặt phòng thành công.\nVui lòng kiểm tra email!"
-                android:textSize="@dimen/sp_24"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="Lọc"
+                android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/animation" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/button_home"
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text_success"
-                android:layout_marginTop="159dp"
-                android:layout_marginBottom="@dimen/dp_60"
-                android:background="@drawable/bg_button"
-                android:text="Về Trang chủ"
-                android:textAllCaps="true"
+                android:layout_marginStart="@dimen/dp_16"
+                app:layout_constraintBottom_toBottomOf="@id/text_filter_label"
+                app:layout_constraintStart_toEndOf="@id/text_filter_label"
+                app:layout_constraintTop_toTopOf="@id/text_filter_label" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_margin="@dimen/dp_16"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/text_filter_label"
+                tools:listitem="@layout/item_order_history" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
 </layout>
+

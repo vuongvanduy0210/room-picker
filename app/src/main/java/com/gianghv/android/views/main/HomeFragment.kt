@@ -39,6 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), FilterBottomSheetDialo
         binding.rcvListRoom.adapter = adapter
         binding.homeViewModel = viewModel
 
+        setLayoutBelowSystemBar(binding.topAppBar)
+
         viewModel.roomList.observe(viewLifecycleOwner) {
             Timber.d("LOG DATA: $it")
             adapter.updateItems(it)

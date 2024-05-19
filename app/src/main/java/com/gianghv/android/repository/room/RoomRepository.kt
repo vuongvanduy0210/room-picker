@@ -7,6 +7,7 @@ import com.gianghv.android.domain.Order
 import com.gianghv.android.domain.Room
 import com.gianghv.android.network.model.order.CreateOrderRequest
 import com.gianghv.android.network.model.order.PaymentRequest
+import com.gianghv.android.util.ext.parseDateZ
 import com.gianghv.android.util.ext.toOrder
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -24,6 +25,8 @@ interface RoomRepository {
     fun createOrder(order: Order): Flow<Order?>
 
     fun payOrder(order: Order): Flow<Order?>
+    fun getOrderByUid(uid: String): Flow<List<Order>>
+    fun getOrderDetail(id: String): Flow<Order?>
 }
 
 class RoomRepositoryImpl @Inject constructor(
@@ -77,8 +80,8 @@ class RoomRepositoryImpl @Inject constructor(
             order.userId,
             order.price,
             order.noteBooking,
-            order.startDate,
-            order.endDate,
+            order.startDate.parseDateZ(),
+            order.endDate.parseDateZ(),
             order.people
         )
         val response = orderDataSource.createOrder(order.roomId, request)
@@ -100,6 +103,32 @@ class RoomRepositoryImpl @Inject constructor(
             emit(response.data?.data?.toOrder())
         } else {
             Timber.e("payOrder: ${response.message}")
+            emit(null)
+        }
+    }
+
+    override fun getOrderByUid(uid: String): Flow<List<Order>> = flow {
+        val response = orderDataSource.getOrderByUid(uid)
+
+        if (response.message == null) {
+            val orders = response.data?.data?.map {
+                it.toOrder()
+            }
+            emit(orders ?: emptyList())
+        } else {
+            Timber.e("getOrderByUid: ${response.message}")
+            emit(emptyList())
+        }
+    }
+
+    override fun getOrderDetail(id: String): Flow<Order?> = flow {
+        val response = orderDataSource.getOrderDetail(id)
+
+        if (response.message == null) {
+            val order = response.data?.data?.toOrder()
+            emit(order)
+        } else {
+            Timber.e("getOrderDetail: ${response.message}")
             emit(null)
         }
     }

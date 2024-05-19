@@ -18,4 +18,10 @@ interface OrderApi {
 
     @POST("api/payment-cash/{orderId}")
     suspend fun payOrder(@Path("orderId") orderId: String, @Body paymentRequest: PaymentRequest): SingleOrderResponse
+
+    @GET("api/get-order-user/{userId}")
+    suspend fun getOrderByUserId(@Path("userId") userId: String): OrderListResponse
+
+    @GET("api/get-id-order/{orderId}")
+    suspend fun getOrderDetail(orderId: String): SingleOrderResponse
 }
