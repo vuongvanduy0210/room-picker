@@ -41,6 +41,17 @@ fun Date.parseDateZ(): String {
     return ""
 }
 
+fun Date.parseDateDMYHM(): String {
+    try {
+        val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        val date = format.format(this)
+        return date
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return ""
+    }
+}
+
 fun String.dateFormatterZ(): Date? {
     try {
         val format = SimpleDateFormat(

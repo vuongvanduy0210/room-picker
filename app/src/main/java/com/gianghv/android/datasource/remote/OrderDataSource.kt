@@ -12,8 +12,9 @@ import javax.inject.Inject
 interface OrderDataSource {
     suspend fun getAllOrders(): Response<OrderListResponse?>
     suspend fun createOrder(roomId: String, request: CreateOrderRequest): Response<SingleOrderResponse?>
-
     suspend fun payOrder(orderId: String, paymentRequest: PaymentRequest): Response<SingleOrderResponse?>
+    suspend fun getOrderByUid(uid: String): Response<OrderListResponse?>
+    suspend fun getOrderDetail(orderId: String): Response<SingleOrderResponse?>
 }
 
 class OrderDataSourceImpl @Inject constructor(
@@ -34,6 +35,18 @@ class OrderDataSourceImpl @Inject constructor(
     override suspend fun payOrder(orderId: String, paymentRequest: PaymentRequest): Response<SingleOrderResponse?> {
         return safeCallApi {
             orderApi.payOrder(orderId, paymentRequest)
+        }
+    }
+
+    override suspend fun getOrderByUid(uid: String): Response<OrderListResponse?> {
+        return safeCallApi {
+            orderApi.getOrderByUserId(uid)
+        }
+    }
+
+    override suspend fun getOrderDetail(orderId: String): Response<SingleOrderResponse?> {
+        return safeCallApi {
+            orderApi.getOrderDetail(orderId)
         }
     }
 }

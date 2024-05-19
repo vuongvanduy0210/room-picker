@@ -13,7 +13,6 @@ import com.gianghv.android.domain.Order
 import com.gianghv.android.domain.Room
 import com.gianghv.android.domain.RoomType
 import com.gianghv.android.util.ext.dateFormatterDMYHM
-import com.gianghv.android.util.ext.dateFormatterZ
 import com.gianghv.android.util.ext.loadImageCenterCrop
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -193,10 +192,10 @@ class HotelAdapter : RecyclerView.Adapter<HotelAdapter.ViewHolder>(), Filterable
         val checkout = checkoutDay?.dateFormatterDMYHM()
         orderList.filter { it.roomId == roomId.id }.forEach { order ->
 
-            val startDate = order.startDate.dateFormatterZ()
-            val endDate = order.endDate.dateFormatterZ()
+            val startDate = order.startDate
+            val endDate = order.endDate
 
-            if (checkin != null && checkout != null && startDate != null && endDate != null) {
+            if (checkin != null && checkout != null) {
                 if (dateRangesOverlap(startDate, endDate, checkin, checkout)) {
                     isNonOverlapping = isNonOverlapping and false
                 }

@@ -14,6 +14,7 @@ import com.gianghv.android.network.model.order.OrderResponseAllOrder
 import com.gianghv.android.network.model.room.RoomDetailResponse
 import com.gianghv.android.network.model.room.RoomResponse
 import com.gianghv.android.network.model.signup.SignUpResponse
+import java.util.Date
 
 fun LoginResponse.toUser() = User(
     id = user?.id ?: "",
@@ -122,6 +123,11 @@ fun OrderResponse.toOrder(): Order {
     } catch (e: IllegalArgumentException) {
         orderStatus = OrderStatus.PENDING
     }
+
+    val startDate = room.startDate.dateFormatterZ()
+    val endDate = room.endDate.dateFormatterZ()
+    val bookingDate = createdAt?.dateFormatterZ()
+
     return Order(
         id,
         userId.toString(),
@@ -131,8 +137,9 @@ fun OrderResponse.toOrder(): Order {
         noteBooking,
         room.id,
         room.people,
-        room.startDate,
-        room.endDate
+        startDate ?: Date(),
+        endDate ?: Date(),
+        bookingDate ?: Date()
     )
 }
 
@@ -144,6 +151,10 @@ fun OrderResponseAllOrder.toOrder(): Order {
     } catch (e: IllegalArgumentException) {
         orderStatus = OrderStatus.PENDING
     }
+    val startDate = room.startDate.dateFormatterZ()
+    val endDate = room.endDate.dateFormatterZ()
+    val bookingDate = createdAt?.dateFormatterZ()
+
     return Order(
         id,
         "",
@@ -153,7 +164,8 @@ fun OrderResponseAllOrder.toOrder(): Order {
         noteBooking,
         room.id,
         room.people,
-        room.startDate,
-        room.endDate
+        startDate ?: Date(),
+        endDate ?: Date(),
+        bookingDate ?: Date()
     )
 }

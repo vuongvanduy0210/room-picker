@@ -34,6 +34,9 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
     override fun setUp() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        setLayoutBelowSystemBar(binding.topAppBar)
+
         val id = arguments?.getString("id")
         if (id != null) {
             viewModel.requestRoom(id)

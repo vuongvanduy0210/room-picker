@@ -4,7 +4,9 @@ import androidx.activity.addCallback
 import com.gianghv.android.R
 import com.gianghv.android.base.BaseFragment
 import com.gianghv.android.databinding.FragmentOrderSuccessBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OrderSuccessFragment : BaseFragment<FragmentOrderSuccessBinding>() {
     override val layoutRes = R.layout.fragment_order_success
 
@@ -13,6 +15,8 @@ class OrderSuccessFragment : BaseFragment<FragmentOrderSuccessBinding>() {
     }
 
     override fun setUp() {
+        setLayoutBelowSystemBar(binding.topAppBar)
+
         binding.buttonBack.setOnClickListener {
             requireActivity().finish()
         }

@@ -1,5 +1,7 @@
 package com.gianghv.android.domain
 
+import java.util.Date
+
 data class Order(
     val id: String,
     val userId: String,
@@ -9,6 +11,7 @@ data class Order(
     val noteBooking: String,
     val roomId: String,
     val people: Int,
-    val startDate: String,
-    val endDate: String
+    val startDate: Date,
+    val endDate: Date,
+    val bookingDate: Date
 )

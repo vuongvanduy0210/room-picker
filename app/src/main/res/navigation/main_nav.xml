@@ -31,4 +31,14 @@
             app:nullable="false" />
 
     </activity>
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="com.gianghv.android.views.orderhistory.OrderHistoryFragment"
+        tools:layout="@layout/fragment_order_history"
+        android:label="OrderHistoryFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.gianghv.android.views.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
