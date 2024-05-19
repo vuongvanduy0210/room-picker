@@ -13,7 +13,6 @@ import com.gianghv.android.util.app.AppUtils
 import com.gianghv.android.views.AuthActivity
 import com.gianghv.android.views.common.AuthViewModel
 import com.gianghv.android.views.common.BGType
-import com.gianghv.android.views.signin.SignInFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -69,7 +68,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
         lifecycleScope.launch {
             authViewModel.isSignedIn.collect {
                 if (it) {
-                    navigatePopBackstack(SignInFragmentDirections.actionSignInFragmentToMainNav())
+                    navigatePopBackstack(SignUpFragmentDirections.actionSignUpFragmentToMainNav())
                 }
             }
         }

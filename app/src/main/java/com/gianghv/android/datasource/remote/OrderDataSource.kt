@@ -4,6 +4,7 @@ import com.gianghv.android.base.BaseRemoteDataSource
 import com.gianghv.android.base.Response
 import com.gianghv.android.network.api.OrderApi
 import com.gianghv.android.network.model.order.CreateOrderRequest
+import com.gianghv.android.network.model.order.OrderDetailApiResponse
 import com.gianghv.android.network.model.order.OrderListResponse
 import com.gianghv.android.network.model.order.PaymentRequest
 import com.gianghv.android.network.model.room.SingleOrderResponse
@@ -14,7 +15,7 @@ interface OrderDataSource {
     suspend fun createOrder(roomId: String, request: CreateOrderRequest): Response<SingleOrderResponse?>
     suspend fun payOrder(orderId: String, paymentRequest: PaymentRequest): Response<SingleOrderResponse?>
     suspend fun getOrderByUid(uid: String): Response<OrderListResponse?>
-    suspend fun getOrderDetail(orderId: String): Response<SingleOrderResponse?>
+    suspend fun getOrderDetail(orderId: String): Response<OrderDetailApiResponse?>
 }
 
 class OrderDataSourceImpl @Inject constructor(
@@ -44,7 +45,7 @@ class OrderDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getOrderDetail(orderId: String): Response<SingleOrderResponse?> {
+    override suspend fun getOrderDetail(orderId: String): Response<OrderDetailApiResponse?> {
         return safeCallApi {
             orderApi.getOrderDetail(orderId)
         }

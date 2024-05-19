@@ -22,8 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrderViewModel @Inject constructor(
-    private val authRepository: AuthRepository,
-    private val roomRepository: RoomRepository
+    private val authRepository: AuthRepository, private val roomRepository: RoomRepository
 ) : BaseViewModel() {
     val room = MutableLiveData<Room>()
     private val orderList = MutableLiveData<List<Order>>()
@@ -118,11 +117,8 @@ class OrderViewModel @Inject constructor(
                 }
             }.flatMapConcat { order ->
                 Timber.d("FlatMap Order $order")
-                if (paymentMethod.value == TypePayment.CASH) {
-                    order.typePayment = TypePayment.CASH
-                } else {
-                    order.typePayment = TypePayment.VNPAY
-                }
+                order.typePayment = paymentMethod.value ?: TypePayment.EMPTY
+                order.typePayment = TypePayment.VNPAY
 
                 roomRepository.payOrder(order)
             }.collect {

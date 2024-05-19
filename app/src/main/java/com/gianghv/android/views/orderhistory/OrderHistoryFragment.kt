@@ -1,5 +1,9 @@
 package com.gianghv.android.views.orderhistory
 
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.gianghv.android.R
@@ -9,6 +13,7 @@ import com.gianghv.android.views.MainActivity
 import com.gianghv.android.views.orderhistory.adapter.OrderHistoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
@@ -26,8 +31,28 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
     override fun setUp() {
         setLayoutBelowSystemBar(binding.topAppBar)
         binding.recycler.adapter = adapter
+        adapter.setOnOrderClickListener {
+            Timber.d("onOrderClick: $it")
+            openOrderDetail(it)
+        }
 
         observe()
+
+        val items =
+            listOf(OrderHistoryAdapter.FILTER_ALL, OrderHistoryAdapter.FILTER_PAID, OrderHistoryAdapter.FILTER_PENDING)
+        val arrayAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
+        binding.spinnerFilter.adapter = arrayAdapter
+
+        binding.spinnerFilter.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                adapter.filter.filter(items[position])
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                adapter.filter.filter("")
+            }
+        }
     }
 
     private fun observe() {
@@ -40,5 +65,9 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
         viewModel.orders.observe(viewLifecycleOwner) {
             viewModel.rooms.value?.let { it1 -> adapter.setItems(it, it1) }
         }
+    }
+
+    private fun openOrderDetail(orderId: String) {
+        navigate(OrderHistoryFragmentDirections.actionOrderHistoryFragmentToOrderDetailFragment(id = orderId))
     }
 }

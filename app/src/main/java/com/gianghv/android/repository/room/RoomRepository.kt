@@ -5,7 +5,11 @@ import com.gianghv.android.datasource.remote.OrderDataSource
 import com.gianghv.android.datasource.remote.RoomDataSource
 import com.gianghv.android.domain.Order
 import com.gianghv.android.domain.Room
+import com.gianghv.android.domain.RoomEvaluation
+import com.gianghv.android.network.model.evaluation.CreateEvaluationRequest
+import com.gianghv.android.network.model.evaluation.Image
 import com.gianghv.android.network.model.order.CreateOrderRequest
+import com.gianghv.android.network.model.order.CreateOrderRoomRequest
 import com.gianghv.android.network.model.order.PaymentRequest
 import com.gianghv.android.util.ext.parseDateZ
 import com.gianghv.android.util.ext.toOrder
@@ -27,6 +31,8 @@ interface RoomRepository {
     fun payOrder(order: Order): Flow<Order?>
     fun getOrderByUid(uid: String): Flow<List<Order>>
     fun getOrderDetail(id: String): Flow<Order?>
+
+    fun createEvaluate(id: String, evaluate: RoomEvaluation): Flow<Boolean>
 }
 
 class RoomRepositoryImpl @Inject constructor(
@@ -35,7 +41,9 @@ class RoomRepositoryImpl @Inject constructor(
     private val orderDataSource: OrderDataSource
 ) : RoomRepository {
     override fun requestAllRoom(): Flow<List<Room>> = flow {
-        val rooms = roomDataSource.getAllRooms().data
+        val response = roomDataSource.getAllRooms()
+        val rooms = response.data
+        Timber.d("messs: ${response.message}")
         if (rooms != null) {
             emit(rooms.toRoomList())
         } else {
@@ -76,13 +84,11 @@ class RoomRepositoryImpl @Inject constructor(
     }
 
     override fun createOrder(order: Order): Flow<Order?> = flow {
+        val roomCreateOrder = CreateOrderRoomRequest(
+            order.startDate.parseDateZ(), order.endDate.parseDateZ(), order.people
+        )
         val request = CreateOrderRequest(
-            order.userId,
-            order.price,
-            order.noteBooking,
-            order.startDate.parseDateZ(),
-            order.endDate.parseDateZ(),
-            order.people
+            order.userId, order.price, order.noteBooking, roomCreateOrder
         )
         val response = orderDataSource.createOrder(order.roomId, request)
 
@@ -125,11 +131,28 @@ class RoomRepositoryImpl @Inject constructor(
         val response = orderDataSource.getOrderDetail(id)
 
         if (response.message == null) {
-            val order = response.data?.data?.toOrder()
+            val order = response.data?.order?.toOrder()
             emit(order)
         } else {
             Timber.e("getOrderDetail: ${response.message}")
             emit(null)
+        }
+    }
+
+    override fun createEvaluate(id: String, evaluate: RoomEvaluation): Flow<Boolean> = flow {
+        val image = mutableListOf<Image>()
+        evaluate.images.forEach {
+            image.add(Image(it.url))
+        }
+
+        val request = CreateEvaluationRequest(evaluate.star, evaluate.content, evaluate.userId, image)
+        val response = roomDataSource.createEvaluation(id, request)
+
+        if (response.message == null) {
+            emit(true)
+        } else {
+            Timber.e("createEvaluate: ${response.message}")
+            emit(false)
         }
     }
 }

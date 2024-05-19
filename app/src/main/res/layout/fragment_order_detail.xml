@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gianghv.android.views.orderdetail.OrderDetailViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.orderdetail.OrderDetailFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/top_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:attr/actionBarSize">
+
+            <Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/button_back"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_alignParentStart="true"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_back" />
+
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/dp_24"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Chi tiết"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_room"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_0"
+                android:layout_marginStart="@dimen/dp_16"
+                app:cardCornerRadius="@dimen/dp_8"
+                app:layout_constraintDimensionRatio="1.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.4">
+
+                <ImageView
+                    android:id="@+id/image_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/cute_cat" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/container_info"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_0"
+                android:layout_marginStart="@dimen/dp_32"
+                android:layout_marginEnd="@dimen/dp_32"
+                android:gravity="top"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/card_room"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/card_room"
+                app:layout_constraintTop_toTopOf="@id/card_room">
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="@{String.valueOf(viewModel.room.name)}"
+                    android:textSize="@dimen/sp_20"
+                    android:textStyle="bold"
+                    tools:text="Phong vip 1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="Số người: "
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:id="@+id/text_people_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{String.valueOf(viewModel.room.countPeople)}"
+                        android:textSize="@dimen/sp_16"
+                        app:drawableEndCompat="@drawable/ic_people"
+                        tools:text="2" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(viewModel.room.price)}"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/Đêm"
+                        android:textColor="@color/gray_subtext_color"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_checkin_date_label"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="Ngày nhận"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/card_room"
+                app:layout_constraintTop_toBottomOf="@id/text_booking_date_label"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <TextView
+                android:id="@+id/text_checkout_date_label"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:text="Ngày trả"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/text_checkin_date_label"
+                app:layout_constraintStart_toEndOf="@id/text_checkin_date_label"
+                app:layout_constraintTop_toTopOf="@id/text_checkin_date_label"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <LinearLayout
+                android:id="@+id/layout_checkin_time"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_32"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start"
+                app:layout_constraintEnd_toEndOf="@id/text_checkin_date_label"
+                app:layout_constraintStart_toStartOf="@id/text_checkin_date_label"
+                app:layout_constraintTop_toBottomOf="@id/text_checkin_date_label">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:src="@drawable/ic_clock"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/text_checkin_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:lines="2"
+                    android:textSize="@dimen/sp_14"
+                    tools:text="DD/MM/YYYY hh:mm" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_checkout_time"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_32"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start"
+                app:layout_constraintEnd_toEndOf="@id/text_checkout_date_label"
+                app:layout_constraintStart_toStartOf="@id/text_checkout_date_label"
+                app:layout_constraintTop_toBottomOf="@id/text_checkout_date_label">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:src="@drawable/ic_clock"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/text_checkout_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:lines="2"
+                    android:textSize="@dimen/sp_14"
+                    tools:text="DD/MM/YYYY hh:mm" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/text_booking_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="Ngày đặt"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/card_room"
+                app:layout_constraintTop_toBottomOf="@id/card_room" />
+
+            <TextView
+                android:id="@+id/text_booking_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dd_mm_yy"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="@id/text_booking_date_label"
+                app:layout_constraintStart_toStartOf="@+id/container_info"
+                app:layout_constraintTop_toTopOf="@id/text_booking_date_label" />
+
+            <TextView
+                android:id="@+id/text_payment_method"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_checkin_time"
+                tools:text="CASH" />
+
+            <TextView
+                android:id="@+id/text_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@{String.valueOf(viewModel._orderDetail.price)}"
+                android:textColor="@color/blue_dark"
+                android:textSize="@dimen/sp_20"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_payment_method"
+                tools:text="100000 VND" />
+
+            <TextView
+                android:id="@+id/text_order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_mark_order_status"
+                android:padding="@dimen/dp_8"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/layout_checkout_time"
+                app:layout_constraintTop_toTopOf="@id/text_amount"
+                tools:text="Chưa thanh toán" />
+
+            <TextView
+                android:id="@+id/text_evaluation_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="Đánh giá"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/card_room"
+                app:layout_constraintTop_toBottomOf="@id/text_amount" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_evaluate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="button_upload_image,text_upload_image_label,edt_content,button_evaluate,ratingbar" />
+
+            <LinearLayout
+                android:id="@+id/container_pay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_60"
+                android:gravity="center"
+                android:paddingTop="@dimen/dp_8"
+                android:paddingBottom="@dimen/dp_8"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <Button
+                    android:id="@+id/button_pay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button"
+                    android:paddingStart="@dimen/dp_40"
+                    android:paddingEnd="@dimen/dp_40"
+                    android:text="Thanh Toán"
+                    android:textAllCaps="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/button_upload_image"
+                android:layout_width="@dimen/dp_42"
+                android:layout_height="@dimen/dp_42"
+                android:layout_marginTop="@dimen/dp_32"
+                android:background="@color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_image_upload"
+                app:layout_constraintStart_toStartOf="@+id/card_room"
+                app:layout_constraintTop_toBottomOf="@+id/text_evaluation_label" />
+
+            <TextView
+                android:id="@+id/text_upload_image_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="Đính kèm ảnh"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/button_upload_image"
+                app:layout_constraintStart_toEndOf="@+id/button_upload_image"
+                app:layout_constraintTop_toTopOf="@id/button_upload_image" />
+
+            <EditText
+                android:id="@+id/edt_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:hint="Đánh giá"
+                android:maxLines="5"
+                android:minLines="3"
+                app:layout_constraintTop_toBottomOf="@id/button_upload_image"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_content" />
+
+            <Button
+                android:id="@+id/button_evaluate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button"
+                android:paddingStart="@dimen/dp_40"
+                android:paddingEnd="@dimen/dp_40"
+                android:text="Đánh giá"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ratingbar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

@@ -453,6 +453,7 @@
                 app:layout_constraintStart_toStartOf="@id/text_amount_label"
                 app:layout_constraintTop_toBottomOf="@id/text_amount_label" />
 
+
             <EditText
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"

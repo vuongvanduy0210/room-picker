@@ -1,14 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.profile.ProfileFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gianghv.android.views.profile.ProfileViewModel" />
+
+    </data>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".views.profile.ProfileFragment">
 
-</FrameLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/top_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:attr/actionBarSize">
+
+            <Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/dp_24"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="Thông tin cá nhân"
+                        android:textColor="@color/blue_dark"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            </Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_info"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_margin="@dimen/dp_8"
+                android:elevation="@dimen/dp_8"
+                app:cardBackgroundColor="@color/light_pink"
+                app:cardCornerRadius="@dimen/dp_8"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/dp_8"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/image_avatar"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_4"
+                        android:padding="@dimen/dp_2"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/cute_cat"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="@dimen/dp_4" />
+
+                    <TextView
+                        android:id="@+id/text_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_16"
+                        android:gravity="start"
+                        android:text="@{String.valueOf(viewModel.user.name)}"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/text_email"
+                        app:layout_constraintStart_toEndOf="@id/image_avatar"
+                        app:layout_constraintTop_toTopOf="@id/image_avatar"
+                        tools:text="Giang Hoang Van" />
+
+                    <TextView
+                        android:id="@+id/text_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@{String.valueOf(viewModel.user.email)}"
+                        android:textSize="@dimen/sp_14"
+                        app:layout_constraintBottom_toBottomOf="@id/image_avatar"
+                        app:layout_constraintStart_toStartOf="@id/text_name"
+                        app:layout_constraintTop_toBottomOf="@id/text_name"
+                        tools:text="example@gmail.com" />
+
+                    <ImageButton
+                        android:id="@+id/button_update_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_16"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_edit"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_insight"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_margin="@dimen/dp_8"
+                android:elevation="@dimen/dp_8"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/dp_8"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/dp_8"
+                app:layout_constraintHeight_percent="0.14"
+                app:layout_constraintTop_toBottomOf="@id/card_info">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/divider1"
+                        android:layout_width="@dimen/dp_1"
+                        android:layout_height="match_parent"
+                        android:background="@color/card_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_rent_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:gravity="center_vertical"
+                        android:textColor="@color/action_color"
+                        android:textSize="@dimen/sp_22"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/text_rent_count_label"
+                        app:layout_constraintStart_toStartOf="@id/text_rent_count_label"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="10" />
+
+                    <TextView
+                        android:id="@+id/text_rent_count_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/sp_8"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:gravity="center_vertical"
+                        android:text="lượt thuê"
+                        android:textSize="@dimen/sp_18"
+                        app:drawableStartCompat="@drawable/ic_house"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_rent_count" />
+
+
+                    <TextView
+                        android:id="@+id/text_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/sp_16"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/action_color"
+                        android:textSize="@dimen/sp_22"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/text_cost_label"
+                        app:layout_constraintEnd_toEndOf="@id/text_cost_label"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="10000000" />
+
+                    <TextView
+                        android:id="@+id/text_cost_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/sp_16"
+                        android:drawableEnd="@drawable/ic_piggy_bank"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:gravity="center_vertical"
+                        android:text="đã thanh toán"
+                        android:textSize="@dimen/sp_18"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_cost" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:layout_margin="@dimen/dp_8"
+                android:elevation="@dimen/dp_8"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/dp_8"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/dp_8"
+                app:layout_constraintHeight_percent="0.10"
+                app:layout_constraintTop_toBottomOf="@id/card_insight">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/button_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:drawableStart="@drawable/ic_logout"
+                        android:drawablePadding="@dimen/dp_8"
+                        android:gravity="center_vertical"
+                        android:text="Đăng xuất"
+                        android:textSize="@dimen/sp_16" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
+

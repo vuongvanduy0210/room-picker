@@ -3,6 +3,7 @@ package com.gianghv.android.network.api
 import com.gianghv.android.network.model.order.CreateOrderRequest
 import com.gianghv.android.network.model.order.OrderListResponse
 import com.gianghv.android.network.model.order.PaymentRequest
+import com.gianghv.android.network.model.order.OrderDetailApiResponse
 import com.gianghv.android.network.model.room.SingleOrderResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -23,5 +24,5 @@ interface OrderApi {
     suspend fun getOrderByUserId(@Path("userId") userId: String): OrderListResponse
 
     @GET("api/get-id-order/{orderId}")
-    suspend fun getOrderDetail(orderId: String): SingleOrderResponse
+    suspend fun getOrderDetail(@Path("orderId") orderId: String): OrderDetailApiResponse
 }
