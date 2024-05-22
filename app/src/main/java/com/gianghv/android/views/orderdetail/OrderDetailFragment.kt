@@ -194,8 +194,12 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                 binding.textOrderStatus.text = "Chờ thanh toán"
             }
 
-            OrderStatus.PAYED, OrderStatus.COMPLETED -> {
+            OrderStatus.PAYED -> {
                 binding.textOrderStatus.text = "Đã thanh toán"
+            }
+
+            OrderStatus.COMPLETED -> {
+                binding.textOrderStatus.text = "Đã xác nhận"
             }
 
             OrderStatus.DEPOSIT -> {
@@ -216,7 +220,12 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                 }
             }
 
-            OrderStatus.PAYED, OrderStatus.COMPLETED -> {
+            OrderStatus.PAYED -> {
+                binding.groupEvaluate.visibility = View.GONE
+                binding.containerPay.visibility = View.GONE
+            }
+
+            OrderStatus.COMPLETED -> {
                 binding.groupEvaluate.visibility = View.VISIBLE
                 binding.containerPay.visibility = View.GONE
             }

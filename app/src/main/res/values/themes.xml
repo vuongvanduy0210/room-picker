@@ -14,7 +14,7 @@
 
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:statusBarColor">#00000000</item>
+        <item name="android:statusBarColor">@color/blue_light</item>
     </style>
 
     <style name="Theme.Main.Popup" parent="android:style/Theme.Translucent">

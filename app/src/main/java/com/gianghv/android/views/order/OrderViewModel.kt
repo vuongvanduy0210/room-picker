@@ -6,9 +6,11 @@ import com.gianghv.android.base.BaseViewModel
 import com.gianghv.android.domain.Order
 import com.gianghv.android.domain.OrderStatus
 import com.gianghv.android.domain.Room
+import com.gianghv.android.domain.RoomType
 import com.gianghv.android.domain.TypePayment
 import com.gianghv.android.repository.auth.AuthRepository
 import com.gianghv.android.repository.room.RoomRepository
+import com.gianghv.android.util.app.CostUtils
 import com.gianghv.android.util.ext.dateFormatterDMYHM
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.combine
@@ -19,6 +21,7 @@ import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject
+import kotlin.math.round
 
 @HiltViewModel
 class OrderViewModel @Inject constructor(
@@ -33,6 +36,11 @@ class OrderViewModel @Inject constructor(
     val checkOutTime = MutableLiveData("HH:mm")
     val totalPrice = MutableLiveData(0)
     val peopleCount = MutableLiveData(1)
+
+    val basePrice: MutableLiveData<Int> = MutableLiveData(0)
+    val serviceFee: MutableLiveData<Int> = MutableLiveData(0)
+    val tax: MutableLiveData<Int> = MutableLiveData(0)
+
     val note = MutableLiveData("")
     private var uid: String? = null
 
@@ -74,7 +82,35 @@ class OrderViewModel @Inject constructor(
     }
 
     fun calculateTotalPrice() {
-        totalPrice.value = peopleCount.value?.times(room.value?.price ?: 0)
+        Timber.d("Calculate Total Price. Room: ${room.value}")
+        val checkinDate = "${checkInDate.value} ${checkInTime.value}".dateFormatterDMYHM()
+        val checkoutDate = "${checkOutDate.value} ${checkOutTime.value}".dateFormatterDMYHM()
+
+        Timber.d("Calculate Total Price $checkinDate $checkoutDate $room $peopleCount ")
+
+        if (room.value != null && checkinDate != null && checkoutDate != null && room.value != null && peopleCount.value != null) {
+            var totalCost = 0
+
+            val taxFreeCost = CostUtils.calculateTaxFreeCost(
+                room.value!!.price, checkinDate, checkoutDate, room.value!!.type, peopleCount.value!!
+            )
+            totalCost += taxFreeCost
+            basePrice.value = taxFreeCost
+
+            if (room.value!!.type == RoomType.Vip) {
+                val serviceFee = round(taxFreeCost * 0.05f).toInt()
+                this.serviceFee.value = serviceFee
+                totalCost += serviceFee
+            }
+
+            val taxCost = round(totalCost * 0.1f).toInt()
+            tax.value = taxCost
+
+            totalCost += taxCost
+            totalPrice.value = totalCost
+        } else {
+            totalPrice.value = 0
+        }
     }
 
     fun order() {
@@ -118,7 +154,6 @@ class OrderViewModel @Inject constructor(
             }.flatMapConcat { order ->
                 Timber.d("FlatMap Order $order")
                 order.typePayment = paymentMethod.value ?: TypePayment.EMPTY
-                order.typePayment = TypePayment.VNPAY
 
                 roomRepository.payOrder(order)
             }.collect {
@@ -192,6 +227,12 @@ class OrderViewModel @Inject constructor(
 
         Timber.d("checkin $checkin")
         Timber.d("checkout $checkout")
+
+        if (checkin != null && checkout != null) {
+            if (checkin.after(checkout)) {
+                toastMessage.value = "Check in date must be before check out date"
+            }
+        }
 
         orderList.value?.forEach { order ->
 

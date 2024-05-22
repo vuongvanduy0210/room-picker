@@ -28,7 +28,13 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun setUp() {
+        viewModel.getOrders()
+
         setLayoutBelowSystemBar(binding.topAppBar)
         binding.recycler.adapter = adapter
         adapter.setOnOrderClickListener {
@@ -39,7 +45,13 @@ class OrderHistoryFragment : BaseFragment<FragmentOrderHistoryBinding>() {
         observe()
 
         val items =
-            listOf(OrderHistoryAdapter.FILTER_ALL, OrderHistoryAdapter.FILTER_PAID, OrderHistoryAdapter.FILTER_PENDING)
+            listOf(
+                OrderHistoryAdapter.FILTER_ALL,
+                OrderHistoryAdapter.FILTER_PAID,
+                OrderHistoryAdapter.FILTER_PENDING,
+                OrderHistoryAdapter.FILTER_COMPLETED,
+                OrderHistoryAdapter.FILTER_DEPOSIT
+            )
         val arrayAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
         binding.spinnerFilter.adapter = arrayAdapter

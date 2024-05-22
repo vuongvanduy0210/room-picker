@@ -53,4 +53,12 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun updateUser(user: User) {
+        job = viewModelScope.launch(exceptionHandler) {
+            userRepo.updateUser(user).collect{
+                getUser()
+            }
+        }
+    }
+
 }

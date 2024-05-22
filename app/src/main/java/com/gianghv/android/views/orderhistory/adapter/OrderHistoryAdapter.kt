@@ -102,8 +102,16 @@ class OrderHistoryAdapter : RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder>
                         binding.textOrderStatus.text = "Chờ thanh toán"
                     }
 
-                    OrderStatus.PAYED, OrderStatus.COMPLETED, OrderStatus.DEPOSIT -> {
+                    OrderStatus.PAYED -> {
                         binding.textOrderStatus.text = "Đã thanh toán"
+                    }
+
+                    OrderStatus.COMPLETED -> {
+                        binding.textOrderStatus.text = "Đã xác nhận"
+                    }
+
+                    OrderStatus.DEPOSIT -> {
+                        binding.textOrderStatus.text = "Đã huỷ"
                     }
                 }
 
@@ -137,6 +145,8 @@ class OrderHistoryAdapter : RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder>
         const val FILTER_ALL = "Tất cả"
         const val FILTER_PENDING = "Chờ thanh toán"
         const val FILTER_PAID = "Đã thanh toán"
+        const val FILTER_COMPLETED = "Đã xác nhận"
+        const val FILTER_DEPOSIT = "Đã huỷ"
     }
 
     override fun getFilter(): Filter {
@@ -164,11 +174,17 @@ class OrderHistoryAdapter : RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder>
 
                     FILTER_PAID -> {
                         displayItems.clear()
-                        displayItems.addAll(items.filter {
-                            it.status in listOf(
-                                OrderStatus.PAYED, OrderStatus.COMPLETED, OrderStatus.DEPOSIT
-                            )
-                        })
+                        displayItems.addAll(items.filter { it.status == OrderStatus.PAYED })
+                    }
+
+                    FILTER_COMPLETED -> {
+                        displayItems.clear()
+                        displayItems.addAll(items.filter { it.status == OrderStatus.COMPLETED })
+                    }
+
+                    FILTER_DEPOSIT -> {
+                        displayItems.clear()
+                        displayItems.addAll(items.filter { it.status == OrderStatus.DEPOSIT })
                     }
                 }
 

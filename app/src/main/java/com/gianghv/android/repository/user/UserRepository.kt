@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 interface UserRepository {
     fun requestUserDetail(id: String): Flow<User?>
+    suspend fun updateUser(user: User): Flow<User?>
 }
 
 class UserRepositoryImpl @Inject constructor(
@@ -23,6 +24,17 @@ class UserRepositoryImpl @Inject constructor(
             Timber.e("message: ${response.message}")
         } else {
             emit(response.data?.user?.toUser())
+        }
+    }
+    override suspend fun updateUser(user: User): Flow<User?> = flow {
+        val response = userDataSource.updateUser(user.id, user.name, user.email, user.role)
+
+        if (response.message != null) {
+            emit(null)
+            Timber.e(response.message)
+        } else {
+            val data = response.data?.user?.toUser()
+            emit(data)
         }
     }
 

@@ -6,13 +6,15 @@ import androidx.lifecycle.lifecycleScope
 import com.gianghv.android.R
 import com.gianghv.android.base.BaseFragment
 import com.gianghv.android.databinding.FragmentProfileBinding
+import com.gianghv.android.domain.User
 import com.gianghv.android.views.AuthActivity
 import com.gianghv.android.views.MainActivity
+import com.gianghv.android.views.common.EditUserBottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>(), EditUserBottomSheetDialog.OnApplyEditUserListener {
     override val layoutRes = R.layout.fragment_profile
     private var activity: MainActivity? = null
     private val viewModel: ProfileViewModel by viewModels()
@@ -33,6 +35,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
             activity?.finish()
+        }
+
+        binding.buttonUpdateProfile.setOnClickListener {
+            viewModel.user.value?.let { it1 ->
+                EditUserBottomSheetDialog(it1, false, this).show(
+                    childFragmentManager, "EditUserBottomSheetDialog"
+                )
+            }
         }
     }
 
@@ -56,5 +66,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 binding.textRentCount.text = "$totalRentCount"
             }
         }
+    }
+
+    override fun onApplyEditUser(user: User) {
+        viewModel.updateUser(user)
     }
 }
