@@ -85,10 +85,15 @@ class RoomRepositoryImpl @Inject constructor(
 
     override fun createOrder(order: Order): Flow<Order?> = flow {
         val roomCreateOrder = CreateOrderRoomRequest(
-            order.startDate.parseDateZ(), order.endDate.parseDateZ(), order.people
+            order.startDate.parseDateZ(),
+            order.endDate.parseDateZ(),
+            order.people
         )
         val request = CreateOrderRequest(
-            order.userId, order.price, order.noteBooking, roomCreateOrder
+            order.userId,
+            order.price,
+            order.noteBooking,
+            roomCreateOrder
         )
         val response = orderDataSource.createOrder(order.roomId, request)
 

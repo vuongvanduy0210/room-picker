@@ -18,5 +18,4 @@ interface UserApi {
 
     @PUT("api/update-user/{id}")
     suspend fun updateUser(@Path("id") id: String, @Body user: UserUpdateRequest): UserDetailResponse
-
 }

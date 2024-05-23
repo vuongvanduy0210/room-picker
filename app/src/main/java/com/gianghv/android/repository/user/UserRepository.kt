@@ -37,5 +37,4 @@ class UserRepositoryImpl @Inject constructor(
             emit(data)
         }
     }
-
 }

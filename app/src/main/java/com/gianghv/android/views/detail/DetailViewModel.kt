@@ -39,7 +39,6 @@ class DetailViewModel @Inject constructor(
         job = viewModelScope.launch(exceptionHandler) {
             showLoading(true)
 
-
             if (!roomLiveData.value?.evaluation.isNullOrEmpty()) {
                 Timber.d("requestUsers: ${roomLiveData.value?.evaluation}")
                 val listFlow = roomLiveData.value?.evaluation?.asFlow()
@@ -47,8 +46,9 @@ class DetailViewModel @Inject constructor(
                 listFlow?.flatMapMerge(concurrency = 5) { re ->
                     userRepository.requestUserDetail(re.userId)
                 }?.collect {
-                    if (it != null)
+                    if (it != null) {
                         users.addItem(it)
+                    }
                 }
             }
 

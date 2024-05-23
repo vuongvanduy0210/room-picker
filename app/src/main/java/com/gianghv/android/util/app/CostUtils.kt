@@ -12,10 +12,10 @@ object CostUtils {
             val durationInHours = durationInMillis / (1000 * 60 * 60)
             var totalPrice: Int = (basePrice / 24 * durationInHours * people).toInt()
 
-            //Vip service fee
+            // Vip service fee
             if (roomType == RoomType.Vip) totalPrice = round(totalPrice * 1.05f).toInt()
 
-            //VAT
+            // VAT
             totalPrice = round(totalPrice * 1.1f).toInt()
             return totalPrice
         } catch (e: Exception) {

@@ -25,7 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-
 @AndroidEntryPoint
 class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
     override val layoutRes = R.layout.fragment_order_detail
@@ -60,7 +59,6 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
 
                         if (uri != null) selectedImages.add(uri)
                     } else {
-
                     }
                 }
             } else if (data.data != null) {
@@ -70,7 +68,7 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                 if (uri != null) selectedImages.add(uri)
             }
         }
-        if (selectedImages.isNotEmpty()) handleImageSelected();
+        if (selectedImages.isNotEmpty()) handleImageSelected()
     }
 
     private fun handleImageSelected() {
@@ -111,13 +109,15 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
                         uploaded++
                         Timber.d("Image URL: $it")
                         imageUrls.add(it.toString())
-                        if (uploaded == selectedImages.size)
+                        if (uploaded == selectedImages.size) {
                             activity?.showLoading(false)
+                        }
                     }.addOnFailureListener {
                         uploaded++
                         it.printStackTrace()
-                        if (uploaded == selectedImages.size)
+                        if (uploaded == selectedImages.size) {
                             activity?.showLoading(false)
+                        }
                     }
                 }
             }
@@ -133,7 +133,9 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
         val id = activity?.intent?.extras?.getString("id")
         if (id != null) {
             viewModel.getOrderDetail(id)
-        } else activity?.onBackPressed()
+        } else {
+            activity?.onBackPressed()
+        }
 
         lifecycleScope.launch {
             viewModel.isLoading.collect {
@@ -155,12 +157,12 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
 
         viewModel.isEvaluate.observe(viewLifecycleOwner) {
             if (it != null) {
-                if (it)
+                if (it) {
                     activity?.showMessage(requireContext(), "Đánh giá thành công", BGType.BG_TYPE_SUCCESS)
-                else
+                } else {
                     activity?.showMessage(requireContext(), "Đánh giá thất bại", BGType.BG_TYPE_ERROR)
+                }
             }
-
         }
 
         observe()
@@ -239,7 +241,5 @@ class OrderDetailFragment : BaseFragment<FragmentOrderDetailBinding>() {
 
     companion object {
         const val MAX_IMAGES_ALLOWED = 1
-
     }
-
 }

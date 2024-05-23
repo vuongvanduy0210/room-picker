@@ -19,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrderDetailViewModel @Inject constructor(
-    private val authRepository: AuthRepository, private val roomRepository: RoomRepository
+    private val authRepository: AuthRepository,
+    private val roomRepository: RoomRepository
 ) : BaseViewModel() {
     var _orderDetail = MutableLiveData<Order>()
     val room = MutableLiveData<Room>()
@@ -62,7 +63,5 @@ class OrderDetailViewModel @Inject constructor(
             }
             showLoading(false)
         }
-
     }
-
 }

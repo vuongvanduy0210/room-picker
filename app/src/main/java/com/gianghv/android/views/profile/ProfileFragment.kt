@@ -25,7 +25,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), EditUserBottomSh
     }
 
     override fun setUp() {
-
         observe()
 
         binding.buttonLogout.setOnClickListener {
@@ -40,7 +39,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), EditUserBottomSh
         binding.buttonUpdateProfile.setOnClickListener {
             viewModel.user.value?.let { it1 ->
                 EditUserBottomSheetDialog(it1, false, this).show(
-                    childFragmentManager, "EditUserBottomSheetDialog"
+                    childFragmentManager,
+                    "EditUserBottomSheetDialog"
                 )
             }
         }

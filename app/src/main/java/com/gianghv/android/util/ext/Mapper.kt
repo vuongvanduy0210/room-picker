@@ -117,13 +117,11 @@ fun RoomDetailResponse.toRoom(): Room {
 }
 
 fun OrderResponse.toOrder(): Order {
-
     val typePayment: TypePayment = try {
         TypePayment.valueOf(typePayment)
     } catch (e: IllegalArgumentException) {
         TypePayment.EMPTY
     }
-
 
     val orderStatus: OrderStatus = try {
         OrderStatus.valueOf(status)
@@ -157,7 +155,6 @@ fun OrderDetailResponse.toOrder(): Order {
         TypePayment.EMPTY
     }
 
-
     val orderStatus: OrderStatus = try {
         OrderStatus.valueOf(status)
     } catch (e: IllegalArgumentException) {
@@ -184,13 +181,11 @@ fun OrderDetailResponse.toOrder(): Order {
 }
 
 fun OrderResponseAllOrder.toOrder(): Order {
-
     val typePayment: TypePayment = try {
         TypePayment.valueOf(typePayment)
     } catch (e: IllegalArgumentException) {
         TypePayment.EMPTY
     }
-
 
     val orderStatus: OrderStatus = try {
         OrderStatus.valueOf(status)

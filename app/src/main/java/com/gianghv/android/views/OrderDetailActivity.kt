@@ -1,7 +1,6 @@
 package com.gianghv.android.views
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import com.gianghv.android.R
 import com.gianghv.android.base.BaseActivity

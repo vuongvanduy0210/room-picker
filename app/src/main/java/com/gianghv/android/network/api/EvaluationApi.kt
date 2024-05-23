@@ -1,6 +1,5 @@
 package com.gianghv.android.network.api
 
-import com.gianghv.android.base.Response
 import com.gianghv.android.network.model.evaluation.CreateEvaluationRequest
 import retrofit2.http.Body
 import retrofit2.http.POST

@@ -25,7 +25,8 @@ import kotlin.math.round
 
 @HiltViewModel
 class OrderViewModel @Inject constructor(
-    private val authRepository: AuthRepository, private val roomRepository: RoomRepository
+    private val authRepository: AuthRepository,
+    private val roomRepository: RoomRepository
 ) : BaseViewModel() {
     val room = MutableLiveData<Room>()
     private val orderList = MutableLiveData<List<Order>>()
@@ -88,11 +89,19 @@ class OrderViewModel @Inject constructor(
 
         Timber.d("Calculate Total Price $checkinDate $checkoutDate $room $peopleCount ")
 
-        if (room.value != null && checkinDate != null && checkoutDate != null && room.value != null && peopleCount.value != null) {
+        if (
+            room.value != null && checkinDate != null &&
+            checkoutDate != null && room.value != null &&
+            peopleCount.value != null
+        ) {
             var totalCost = 0
 
             val taxFreeCost = CostUtils.calculateTaxFreeCost(
-                room.value!!.price, checkinDate, checkoutDate, room.value!!.type, peopleCount.value!!
+                room.value!!.price,
+                checkinDate,
+                checkoutDate,
+                room.value!!.type,
+                peopleCount.value!!
             )
             totalCost += taxFreeCost
             basePrice.value = taxFreeCost

@@ -9,7 +9,8 @@ import androidx.fragment.app.Fragment
 object PermissionHelper {
     fun requestImageUploadPermission(context: Context, fragment: Fragment): Boolean {
         if (ContextCompat.checkSelfPermission(
-                context, Manifest.permission.READ_MEDIA_IMAGES
+                context,
+                Manifest.permission.READ_MEDIA_IMAGES
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             val permission = arrayOf(Manifest.permission.READ_MEDIA_IMAGES)

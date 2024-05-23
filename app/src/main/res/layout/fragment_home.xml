@@ -43,7 +43,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtSearch"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_45"
+                        android:layout_height="@dimen/dp_55"
                         android:hint="@string/hint_search"
                         android:imeOptions="actionSearch"
                         android:inputType="text"

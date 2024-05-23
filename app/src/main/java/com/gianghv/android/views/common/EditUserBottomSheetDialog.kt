@@ -49,7 +49,6 @@ class EditUserBottomSheetDialog(val user: User, val allowChangeRole: Boolean, va
         binding.btnReset.setOnClickListener {
             initUI()
         }
-
     }
 
     private fun initUI() {
@@ -57,5 +56,4 @@ class EditUserBottomSheetDialog(val user: User, val allowChangeRole: Boolean, va
         binding.edtEmail.setText(user.email)
         binding.spinnerRole.setSelection(roleItems.indexOf(user.role))
     }
-
 }

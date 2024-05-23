@@ -41,7 +41,9 @@ class OrderHistoryAdapter : RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder>
             fun create(parent: ViewGroup): NotFoundViewHolder {
                 return NotFoundViewHolder(
                     ItemNotFoundBinding.inflate(
-                        LayoutInflater.from(parent.context), parent, false
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
             }
@@ -53,7 +55,9 @@ class OrderHistoryAdapter : RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder>
             fun create(parent: ViewGroup): OrderViewHolder {
                 return OrderViewHolder(
                     ItemOrderHistoryBinding.inflate(
-                        LayoutInflater.from(parent.context), parent, false
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
             }
@@ -194,7 +198,6 @@ class OrderHistoryAdapter : RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder>
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 notifyDataSetChanged()
             }
-
         }
     }
 }
