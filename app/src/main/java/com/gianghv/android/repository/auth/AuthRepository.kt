@@ -20,6 +20,8 @@ interface AuthRepository {
     suspend fun saveTokenModel(tokenModel: TokenModel)
 
     suspend fun getTokenModel(): TokenModel?
+
+    suspend fun clearTokenModel()
 }
 
 class AuthRepositoryImpl @Inject constructor(
@@ -40,5 +42,9 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun getTokenModel(): TokenModel? = withContext(Dispatchers.IO) {
         return@withContext localDataSource.getTokenModel()
+    }
+
+    override suspend fun clearTokenModel() = withContext(Dispatchers.IO) {
+        return@withContext localDataSource.clearTokenModel()
     }
 }

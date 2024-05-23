@@ -14,6 +14,10 @@ object FormatUtils {
         return convertEstimatedPrice(estimatedPrice.toDouble()) + "K VNĐ"
     }
 
+    fun convertEstimatedPriceVND(estimatedPrice: Int): String {
+        return convertEstimatedPrice(estimatedPrice.toDouble()) + " VNĐ"
+    }
+
     fun convertEstimatedPriceVND(estimatedPrice: Long): String {
         return convertEstimatedPrice(estimatedPrice.toDouble()) + "K VNĐ"
     }

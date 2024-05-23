@@ -7,6 +7,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'com.google.devtools.ksp'
     id 'org.jlleitschuh.gradle.ktlint'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -84,8 +85,8 @@ dependencies {
 
     // Hilt
     implementation Deps.dagger_hilt
+    implementation 'com.google.android.material:material:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.activity:activity:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
@@ -95,6 +96,10 @@ dependencies {
 
     // define a BOM and its version
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+
+    implementation platform('com.google.firebase:firebase-bom:33.0.0')
+    implementation "com.google.firebase:firebase-storage"
+    implementation 'com.google.firebase:firebase-analytics'
 
     // define any required OkHttp artifacts without version
     implementation Deps.OkHttp3

@@ -57,146 +57,156 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.core.widget.NestedScrollView
+            <FrameLayout
+                android:id="@+id/nested_scroll_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:context=".views.detail.DetailFragment">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/viewpager_image"
+                    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_0"
-                        app:layout_constraintDimensionRatio="1.6"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <LinearLayout
-                        android:id="@+id/container_tag"
-                        android:layout_width="@dimen/dp_0"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/dp_4"
-                        android:paddingBottom="@dimen/dp_4"
-                        app:layout_constraintStart_toStartOf="@id/text_name"
-                        app:layout_constraintTop_toBottomOf="@id/text_name">
+                        tools:context=".views.detail.DetailFragment">
 
-                        <TextView
-                            android:id="@+id/text_evaluation"
-                            android:layout_width="wrap_content"
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewpager_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_0"
+                            app:layout_constraintDimensionRatio="1.6"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:id="@+id/container_tag"
+                            android:layout_width="@dimen/dp_0"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/dp_8"
-                            android:background="@drawable/bg_room_type_marking"
-                            android:drawablePadding="@dimen/dp_4"
-                            android:gravity="center"
-                            android:paddingStart="@dimen/dp_16"
+                            android:orientation="horizontal"
                             android:paddingTop="@dimen/dp_4"
-                            android:paddingEnd="@dimen/dp_16"
-                            android:paddingBottom="@dimen/dp_8"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/sp_14"
-                            android:textStyle="bold"
-                            android:visibility="visible"
-                            app:drawableStartCompat="@drawable/ic_star"
-                            tools:text="4.5" />
+                            android:paddingBottom="@dimen/dp_4"
+                            app:layout_constraintBottom_toBottomOf="@id/text_name"
+                            app:layout_constraintStart_toEndOf="@id/text_name"
+                            app:layout_constraintTop_toTopOf="@id/text_name">
+
+                            <TextView
+                                android:id="@+id/text_evaluation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/dp_8"
+                                android:background="@drawable/bg_room_type_marking"
+                                android:drawablePadding="@dimen/dp_4"
+                                android:gravity="center"
+                                android:paddingStart="@dimen/dp_16"
+                                android:paddingTop="@dimen/dp_4"
+                                android:paddingEnd="@dimen/dp_16"
+                                android:paddingBottom="@dimen/dp_8"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp_14"
+                                android:textStyle="bold"
+                                android:visibility="visible"
+                                app:drawableStartCompat="@drawable/ic_star"
+                                tools:text="4.5" />
+
+                            <TextView
+                                android:id="@+id/text_room_type_vip"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/dp_8"
+                                android:background="@drawable/bg_room_type_marking"
+                                android:gravity="center"
+                                android:paddingStart="@dimen/dp_16"
+                                android:paddingTop="@dimen/dp_4"
+                                android:paddingEnd="@dimen/dp_16"
+                                android:paddingBottom="@dimen/dp_4"
+                                android:text="VIP"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp_14"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+                        </LinearLayout>
+
 
                         <TextView
-                            android:id="@+id/text_room_type_vip"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/dp_8"
-                            android:background="@drawable/bg_room_type_marking"
-                            android:gravity="center"
-                            android:paddingStart="@dimen/dp_16"
-                            android:paddingTop="@dimen/dp_4"
-                            android:paddingEnd="@dimen/dp_16"
-                            android:paddingBottom="@dimen/dp_4"
-                            android:text="VIP"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/sp_14"
+                            android:id="@+id/text_name"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_16"
+                            android:layout_marginTop="@dimen/dp_32"
+                            android:layout_marginEnd="@dimen/dp_16"
+                            android:lines="1"
+                            android:textSize="@dimen/sp_20"
                             android:textStyle="bold"
-                            android:visibility="visible" />
-                    </LinearLayout>
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/viewpager_image"
+                            app:layout_constraintWidth_percent="0.5"
+                            tools:text="Phong vip 1" />
 
+                        <TextView
+                            android:id="@+id/text_desc_label"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_16"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:layout_marginEnd="@dimen/dp_16"
+                            android:lines="1"
+                            android:text="Mô tả"
+                            android:textSize="@dimen/sp_20"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/container_tag" />
 
-                    <TextView
-                        android:id="@+id/text_name"
-                        android:layout_width="@dimen/dp_0"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:layout_marginTop="@dimen/dp_32"
-                        android:layout_marginEnd="@dimen/dp_16"
-                        android:lines="1"
-                        android:textSize="@dimen/sp_20"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/viewpager_image"
-                        tools:text="Phong vip 1" />
+                        <TextView
+                            android:id="@+id/text_desc"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:layout_marginEnd="@dimen/dp_16"
+                            android:maxLines="4"
+                            android:textSize="@dimen/sp_16"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/text_name"
+                            app:layout_constraintTop_toBottomOf="@id/text_desc_label"
+                            tools:text="JHAHAUHIAJHHGBLDHDAH awgfb  asfhsahf asgfafh" />
 
-                    <TextView
-                        android:id="@+id/text_desc_label"
-                        android:layout_width="@dimen/dp_0"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:layout_marginEnd="@dimen/dp_16"
-                        android:lines="1"
-                        android:text="Mô tả"
-                        android:textSize="@dimen/sp_20"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/container_tag" />
+                        <TextView
+                            android:id="@+id/text_evaluation_label"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_16"
+                            android:layout_marginTop="@dimen/dp_16"
+                            android:layout_marginEnd="@dimen/dp_16"
+                            android:lines="1"
+                            android:text="Đánh giá"
+                            android:textSize="@dimen/sp_20"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/text_desc" />
 
-                    <TextView
-                        android:id="@+id/text_desc"
-                        android:layout_width="@dimen/dp_0"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:layout_marginEnd="@dimen/dp_16"
-                        android:maxLines="4"
-                        android:textSize="@dimen/sp_16"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/text_name"
-                        app:layout_constraintTop_toBottomOf="@id/text_desc_label"
-                        tools:text="JHAHAUHIAJHHGBLDHDAH awgfb  asfhsahf asgfafh" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/text_evaluation_label"
-                        android:layout_width="@dimen/dp_0"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:layout_marginEnd="@dimen/dp_16"
-                        android:lines="1"
-                        android:text="Đánh giá"
-                        android:textSize="@dimen/sp_20"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/text_desc" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_evaluation"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_8"
                         android:layout_marginEnd="@dimen/dp_16"
-                        android:nestedScrollingEnabled="false"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="true"
+                        android:paddingBottom="@dimen/dp_60"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintTop_toBottomOf="@id/text_evaluation_label"
                         tools:itemCount="3"
                         tools:listitem="@layout/item_evaluation" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
-            </androidx.core.widget.NestedScrollView>
+            </FrameLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

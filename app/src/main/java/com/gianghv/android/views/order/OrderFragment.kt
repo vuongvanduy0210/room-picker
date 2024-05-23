@@ -12,6 +12,7 @@ import com.gianghv.android.base.BaseFragment
 import com.gianghv.android.databinding.FragmentOrderBinding
 import com.gianghv.android.domain.Room
 import com.gianghv.android.domain.TypePayment
+import com.gianghv.android.util.app.FormatUtils
 import com.gianghv.android.util.ext.currentDate
 import com.gianghv.android.util.ext.loadImageCenterCrop
 import com.gianghv.android.views.DetailActivity
@@ -47,6 +48,9 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
             viewModel.calculateTotalPrice()
             updateUI()
         }
+        viewModel.totalPrice.observe(viewLifecycleOwner) {
+            binding.textAmount.text = FormatUtils.convertEstimatedPriceVND(it)
+        }
 
         lifecycleScope.launch {
             viewModel.isLoading.collect {
@@ -80,6 +84,22 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
             openPickDate { date ->
                 viewModel.checkOutDate.value = date
             }
+        }
+
+        viewModel.checkInDate.observe(viewLifecycleOwner) {
+            viewModel.calculateTotalPrice()
+        }
+
+        viewModel.checkOutDate.observe(viewLifecycleOwner) {
+            viewModel.calculateTotalPrice()
+        }
+
+        viewModel.checkInTime.observe(viewLifecycleOwner) {
+            viewModel.calculateTotalPrice()
+        }
+
+        viewModel.checkOutTime.observe(viewLifecycleOwner) {
+            viewModel.calculateTotalPrice()
         }
 
         binding.layoutCheckinTime.setOnClickListener {
@@ -127,12 +147,24 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
         viewModel.orderSuccess.observe(viewLifecycleOwner) {
             if (it) openOrderSuccess()
         }
+
+        viewModel.basePrice.observe(viewLifecycleOwner) {
+            binding.textBasePrice.text = FormatUtils.convertEstimatedPriceVND(it)
+        }
+        viewModel.tax.observe(viewLifecycleOwner) {
+            binding.textTax.text = FormatUtils.convertEstimatedPriceVND(it)
+        }
+        viewModel.serviceFee.observe(viewLifecycleOwner) {
+            binding.textServiceFee.text = FormatUtils.convertEstimatedPriceVND(it)
+        }
     }
 
     private fun updateUI() {
         binding.textBookingDate.currentDate()
         val imageUrl = mRoom?.images?.firstOrNull()?.url.orEmpty()
         binding.imageRoom.loadImageCenterCrop(imageUrl)
+
+        binding.textPrice.text = mRoom?.price?.let { FormatUtils.convertEstimatedPriceVND(it) }
     }
 
     private fun openOrderSuccess() {

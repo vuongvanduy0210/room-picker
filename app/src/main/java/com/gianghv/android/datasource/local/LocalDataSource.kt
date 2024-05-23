@@ -11,6 +11,8 @@ interface LocalDataSource {
     suspend fun saveTokenModel(tokenModel: TokenModel)
 
     suspend fun getTokenModel(): TokenModel?
+
+    suspend fun clearTokenModel()
 }
 
 class LocalDataSourceImpl @Inject constructor(
@@ -32,5 +34,9 @@ class LocalDataSourceImpl @Inject constructor(
         } catch (e: Exception) {
             null
         }
+    }
+
+    override suspend fun clearTokenModel() {
+        sharedPreferences.edit().remove(AppConstants.KEY_ACCESS_TOKEN).apply()
     }
 }

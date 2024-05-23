@@ -10,6 +10,8 @@ import com.gianghv.android.datasource.remote.OrderDataSource
 import com.gianghv.android.datasource.remote.OrderDataSourceImpl
 import com.gianghv.android.datasource.remote.RoomDataSource
 import com.gianghv.android.datasource.remote.RoomDataSourceImpl
+import com.gianghv.android.datasource.remote.UserDataSource
+import com.gianghv.android.datasource.remote.UserDataSourceImpl
 import com.gianghv.android.util.app.AppConstants
 import dagger.Module
 import dagger.Provides
@@ -50,5 +52,11 @@ object DataSourceModule {
     @Singleton
     fun provideOrderDataSource(orderDataSourceImpl: OrderDataSourceImpl): OrderDataSource {
         return orderDataSourceImpl
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserDataSource(userDataSourceImpl: UserDataSourceImpl): UserDataSource {
+        return userDataSourceImpl
     }
 }

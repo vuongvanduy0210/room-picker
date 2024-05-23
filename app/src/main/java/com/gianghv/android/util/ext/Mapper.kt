@@ -9,11 +9,13 @@ import com.gianghv.android.domain.RoomType
 import com.gianghv.android.domain.TypePayment
 import com.gianghv.android.domain.User
 import com.gianghv.android.network.model.login.LoginResponse
+import com.gianghv.android.network.model.order.OrderDetailResponse
 import com.gianghv.android.network.model.order.OrderResponse
 import com.gianghv.android.network.model.order.OrderResponseAllOrder
 import com.gianghv.android.network.model.room.RoomDetailResponse
 import com.gianghv.android.network.model.room.RoomResponse
 import com.gianghv.android.network.model.signup.SignUpResponse
+import com.gianghv.android.network.model.user.UserResponse
 import java.util.Date
 
 fun LoginResponse.toUser() = User(
@@ -114,14 +116,19 @@ fun RoomDetailResponse.toRoom(): Room {
     )
 }
 
-// TODO: change this
 fun OrderResponse.toOrder(): Order {
-    val typePayment = TypePayment.EMPTY
-    var orderStatus: OrderStatus
-    try {
-        orderStatus = OrderStatus.valueOf(status)
+
+    val typePayment: TypePayment = try {
+        TypePayment.valueOf(typePayment)
     } catch (e: IllegalArgumentException) {
-        orderStatus = OrderStatus.PENDING
+        TypePayment.EMPTY
+    }
+
+
+    val orderStatus: OrderStatus = try {
+        OrderStatus.valueOf(status)
+    } catch (e: IllegalArgumentException) {
+        OrderStatus.PENDING
     }
 
     val startDate = room.startDate.dateFormatterZ()
@@ -143,14 +150,54 @@ fun OrderResponse.toOrder(): Order {
     )
 }
 
-fun OrderResponseAllOrder.toOrder(): Order {
-    val typePayment = TypePayment.EMPTY
-    var orderStatus: OrderStatus
-    try {
-        orderStatus = OrderStatus.valueOf(status)
+fun OrderDetailResponse.toOrder(): Order {
+    val typePayment: TypePayment = try {
+        TypePayment.valueOf(typePayment)
     } catch (e: IllegalArgumentException) {
-        orderStatus = OrderStatus.PENDING
+        TypePayment.EMPTY
     }
+
+
+    val orderStatus: OrderStatus = try {
+        OrderStatus.valueOf(status)
+    } catch (e: IllegalArgumentException) {
+        OrderStatus.PENDING
+    }
+
+    val startDate = room.startDate.dateFormatterZ()
+    val endDate = room.endDate.dateFormatterZ()
+    val bookingDate = createdAt?.dateFormatterZ()
+
+    return Order(
+        id,
+        userId?.id.toString(),
+        typePayment,
+        price,
+        orderStatus,
+        noteBooking,
+        room.id,
+        room.people,
+        startDate ?: Date(),
+        endDate ?: Date(),
+        bookingDate ?: Date()
+    )
+}
+
+fun OrderResponseAllOrder.toOrder(): Order {
+
+    val typePayment: TypePayment = try {
+        TypePayment.valueOf(typePayment)
+    } catch (e: IllegalArgumentException) {
+        TypePayment.EMPTY
+    }
+
+
+    val orderStatus: OrderStatus = try {
+        OrderStatus.valueOf(status)
+    } catch (e: IllegalArgumentException) {
+        OrderStatus.PENDING
+    }
+
     val startDate = room.startDate.dateFormatterZ()
     val endDate = room.endDate.dateFormatterZ()
     val bookingDate = createdAt?.dateFormatterZ()
@@ -168,4 +215,8 @@ fun OrderResponseAllOrder.toOrder(): Order {
         endDate ?: Date(),
         bookingDate ?: Date()
     )
+}
+
+fun UserResponse.toUser(): User {
+    return User(id, name, email, role)
 }

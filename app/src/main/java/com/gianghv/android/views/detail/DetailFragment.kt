@@ -49,6 +49,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
             }
         }
 
+        viewModel.users.observe(viewLifecycleOwner) {
+            evaluationAdapter.updateUserList(it)
+        }
+
         imageViewAdapter.setOnImageItemClickListener {
             showImage(it)
         }

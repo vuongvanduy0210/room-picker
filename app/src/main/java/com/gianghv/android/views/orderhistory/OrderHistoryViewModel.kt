@@ -26,11 +26,9 @@ class OrderHistoryViewModel @Inject constructor(
         runBlocking {
             uid = authRepository.getTokenModel()?.uid
         }
-
-        getOrders()
     }
 
-    private fun getOrders() {
+    fun getOrders() {
         job = viewModelScope.launch(exceptionHandler) {
             showLoading(true)
             val getOrderFlow = roomRepository.getOrderByUid(uid.toString())
