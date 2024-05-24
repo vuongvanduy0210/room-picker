@@ -123,7 +123,6 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
             if (mRoom?.countPeople != null) {
                 if (people < mRoom?.countPeople!!) {
                     viewModel.peopleCount.value = ++people
-                    viewModel.calculateTotalPrice()
                 }
             }
         }
@@ -132,7 +131,6 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>() {
             var people = binding.textPeopleCount.text.toString().toInt()
             if (people > 1) {
                 viewModel.peopleCount.value = --people
-                viewModel.calculateTotalPrice()
             }
         }
 

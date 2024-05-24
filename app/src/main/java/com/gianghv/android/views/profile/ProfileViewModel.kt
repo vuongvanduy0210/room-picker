@@ -40,7 +40,7 @@ class ProfileViewModel @Inject constructor(
     private fun getUser() {
         job = viewModelScope.launch(exceptionHandler) {
             showLoading(true)
-            val orderFlow = roomRepository.getAllOrder()
+            val orderFlow = roomRepository.getOrderByUid(uid)
             val userFlow = userRepo.requestUserDetail(uid)
 
             combine(orderFlow, userFlow) { it1, it2 ->

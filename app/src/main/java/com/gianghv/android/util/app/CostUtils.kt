@@ -28,7 +28,7 @@ object CostUtils {
         try {
             val durationInMillis = abs(checkOut.time - checkIn.time)
             val durationInHours = durationInMillis / (1000 * 60 * 60)
-            val totalPrice = (basePrice / 24 * durationInHours * people).toInt()
+            val totalPrice = (basePrice / 24 * durationInHours).toInt()
 
             return totalPrice
         } catch (e: Exception) {

@@ -45,9 +45,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
                 onClickLogin()
             }
 
-            layoutForgotPassword.setOnClickListener {
-            }
-
             layoutSignUp.setOnClickListener {
                 navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
             }

@@ -54,7 +54,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), EditUserBottomSh
         }
 
         viewModel.order.observe(viewLifecycleOwner) { order ->
-            if (!order.isNullOrEmpty()) {
+            if (order != null) {
                 var totalRentCount = 0
                 var totalCost = 0
                 order.forEach {
